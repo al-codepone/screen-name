@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteRule ^(signup|login|edit-account|forgot-password)$ ./?r=$1 [NC,L]
+RewriteRule ^(verify-email|reset-password)/(\d+)/([a-f0-9]{40}) ./?r=$1&id=$2&token=$3 [NC,L]
+RewriteRule ^logout$ ./log-out.php [NC,L]

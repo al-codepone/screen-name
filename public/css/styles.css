@@ -1,0 +1,48 @@
+body {
+    margin:0.75em 0;
+    background-color:#ffffff;
+}
+
+form div {
+    margin-bottom:0.6em;
+}
+
+label {
+    display:block;
+}
+
+label[for=remember_me] {
+    display:inline;
+}
+
+#main {
+    margin:0 auto;
+    width:28em;
+}
+
+#nav {
+    padding:.5em;
+    margin:0 0 0.6em 0;
+    background:#e2e2e2;
+    list-style-type:none;
+}
+
+#nav li {
+    display:inline;
+    padding-right:1.3em;
+}
+
+#c_remember_me {
+    unicode-bidi:embed;
+    direction:rtl;
+    text-align:left;
+}
+
+#c_remember_me * {
+    unicode-bidi:embed;
+    direction:ltr;
+}
+
+.error {
+    color:#ee0000;
+}

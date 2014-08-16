@@ -1,0 +1,25 @@
+{
+    "require": {
+        "cityphp/cityphp": "0.4.0"
+    },
+    "autoload": {
+        "psr-0": {"vanilla\\": "src/"},
+        "files": [
+            "src/vanilla/email.php",
+            "src/vanilla/emailStates.php",
+            "src/vanilla/emailTaken.php",
+            "src/vanilla/invalidPassword.php",
+            "src/vanilla/isPassword.php",
+            "src/vanilla/usernameTaken.php",
+            "src/vanilla/validatePassword.php",
+            "src/vanilla/validateUsername.php",
+            "src/vanilla/html/accountUpdated.php",
+            "src/vanilla/html/editAccount.php",
+            "src/vanilla/html/forgotPassword.php",
+            "src/vanilla/html/login.php",
+            "src/vanilla/html/navItems.php",
+            "src/vanilla/html/resetPassword.php",
+            "src/vanilla/html/signUp.php"
+        ]
+    }
+}
