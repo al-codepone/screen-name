@@ -1,18 +1,17 @@
 <?php
 
-require 'const.php';
-require 'vendor/autoload.php';
+require 'boot.php';
 
-use vanilla\db\ModelFactory;
+use scrnnm\db\ModelFactory;
 
 session_name(SESSION_NAME);
 session_start();
 
-$userModel = ModelFactory::get('vanilla\db\UserModel');
-$loginModel = ModelFactory::get('vanilla\db\LoginModel');
+$userModel = ModelFactory::get('scrnnm\db\UserModel');
+$loginModel = ModelFactory::get('scrnnm\db\LoginModel');
 $user = $loginModel->getActiveUser();
 
-include 'src/vanilla/routes/' . route(array(
+include '../src/scrnnm/routes/' . route(array(
     null => 'home.php',
     'signup' => 'sign-up.php',
     'login' => 'login.php',
@@ -22,6 +21,6 @@ include 'src/vanilla/routes/' . route(array(
     'reset-password' => 'reset-password.php'));
 
 $navItems = navItems($user);
-include 'src/vanilla/html/template.php';
+include '../src/scrnnm/html/template.php';
 
 ?>

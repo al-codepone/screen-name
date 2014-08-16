@@ -1,6 +1,6 @@
 <?php
 
-$validator = new vanilla\forms\LoginValidator();
+$validator = new scrnnm\forms\LoginValidator();
 
 if($user) {
     $content = 'You are already logged in.';

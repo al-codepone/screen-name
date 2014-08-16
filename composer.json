@@ -3,23 +3,23 @@
         "cityphp/cityphp": "0.4.0"
     },
     "autoload": {
-        "psr-0": {"vanilla\\": "src/"},
+        "psr-0": {"scrnnm\\": "src/"},
         "files": [
-            "src/vanilla/email.php",
-            "src/vanilla/emailStates.php",
-            "src/vanilla/emailTaken.php",
-            "src/vanilla/invalidPassword.php",
-            "src/vanilla/isPassword.php",
-            "src/vanilla/usernameTaken.php",
-            "src/vanilla/validatePassword.php",
-            "src/vanilla/validateUsername.php",
-            "src/vanilla/html/accountUpdated.php",
-            "src/vanilla/html/editAccount.php",
-            "src/vanilla/html/forgotPassword.php",
-            "src/vanilla/html/login.php",
-            "src/vanilla/html/navItems.php",
-            "src/vanilla/html/resetPassword.php",
-            "src/vanilla/html/signUp.php"
+            "src/scrnnm/email.php",
+            "src/scrnnm/emailStates.php",
+            "src/scrnnm/emailTaken.php",
+            "src/scrnnm/invalidPassword.php",
+            "src/scrnnm/isPassword.php",
+            "src/scrnnm/usernameTaken.php",
+            "src/scrnnm/validatePassword.php",
+            "src/scrnnm/validateUsername.php",
+            "src/scrnnm/html/accountUpdated.php",
+            "src/scrnnm/html/editAccount.php",
+            "src/scrnnm/html/forgotPassword.php",
+            "src/scrnnm/html/login.php",
+            "src/scrnnm/html/navItems.php",
+            "src/scrnnm/html/resetPassword.php",
+            "src/scrnnm/html/signUp.php"
         ]
     }
 }

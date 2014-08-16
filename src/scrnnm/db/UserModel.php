@@ -1,9 +1,9 @@
 <?php
 
-namespace vanilla\db;
+namespace scrnnm\db;
 
 use cityphp\db\DatabaseAdapter;
-use vanilla\db\ModelFactory;
+use scrnnm\db\ModelFactory;
 
 class UserModel extends DatabaseAdapter {
     public function install() {
@@ -32,7 +32,7 @@ class UserModel extends DatabaseAdapter {
             $userID = $this->conn()->insert_id;
 
             if($data['email']) {
-                $verifyEmailModel = ModelFactory::get('vanilla\db\VerifyEmailModel');
+                $verifyEmailModel = ModelFactory::get('scrnnm\db\VerifyEmailModel');
                 $verifyEmailModel->createToken($userID, $data['username'], $data['email']);
             }
         }
@@ -70,7 +70,7 @@ class UserModel extends DatabaseAdapter {
         }
 
         if($emailStates['is_new'] || $emailStates['is_changed']) {
-            $verifyEmailModel = ModelFactory::get('vanilla\db\VerifyEmailModel');
+            $verifyEmailModel = ModelFactory::get('scrnnm\db\VerifyEmailModel');
             $verifyEmailModel->createToken($userID, $formData['username'], $formData['email']);
         }
 

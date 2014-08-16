@@ -1,0 +1,89 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "656a5e2bb90a3e8d32b1620936f349b6",
+    "packages": [
+        {
+            "name": "cityphp/cityphp",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/al-codepone/cityphp.git",
+                "reference": "a8d6a5d28589ec64b453f08c3655e05f4deeac64"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/al-codepone/cityphp/zipball/a8d6a5d28589ec64b453f08c3655e05f4deeac64",
+                "reference": "a8d6a5d28589ec64b453f08c3655e05f4deeac64",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "cityphp\\": "src/"
+                },
+                "files": [
+                    "src/cityphp/bcryptHash.php",
+                    "src/cityphp/clamp.php",
+                    "src/cityphp/paginate.php",
+                    "src/cityphp/route.php",
+                    "src/cityphp/sha1Token.php",
+                    "src/cityphp/html/attributes.php",
+                    "src/cityphp/html/autofocus.php",
+                    "src/cityphp/html/blist.php",
+                    "src/cityphp/html/checkboxes.php",
+                    "src/cityphp/html/input.php",
+                    "src/cityphp/html/radioButtons.php",
+                    "src/cityphp/html/select.php",
+                    "src/cityphp/html/textarea.php",
+                    "src/cityphp/time/datetimeNow.php",
+                    "src/cityphp/time/datetimeTo.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Unlicense"
+            ],
+            "authors": [
+                {
+                    "name": "Ry Ferguson",
+                    "email": "rytf12@gmail.com",
+                    "homepage": "http://ikitovagn.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP web application library",
+            "homepage": "https://github.com/al-codepone/cityphp",
+            "keywords": [
+                "cityphp",
+                "datetime",
+                "html",
+                "php",
+                "routing",
+                "sql"
+            ],
+            "time": "2014-01-21 02:10:56"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": [
+
+    ],
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}

@@ -1,9 +1,9 @@
 <?php
 
-namespace vanilla\db;
+namespace scrnnm\db;
 
 use cityphp\db\DatabaseHandle;
-use vanilla\db\ModelFactory;
+use scrnnm\db\ModelFactory;
 
 class LoginModel extends TokenModel {
     public function __construct(DatabaseHandle $databaseHandle) {
@@ -11,7 +11,7 @@ class LoginModel extends TokenModel {
     }
 
     public function login($formData) {
-        $userModel = ModelFactory::get('vanilla\db\UserModel');
+        $userModel = ModelFactory::get('scrnnm\db\UserModel');
         $userData = $userModel->getUserWithUsername($formData['username']);
 
         if(!$userData || $userData['password'] != bcryptHash($formData['password'], $userData['password'])) {

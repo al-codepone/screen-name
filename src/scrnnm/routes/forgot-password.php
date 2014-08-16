@@ -1,15 +1,15 @@
 <?php
 
-use vanilla\db\ModelFactory;
+use scrnnm\db\ModelFactory;
 
-$validator = new vanilla\forms\ForgotPasswordValidator();
+$validator = new scrnnm\forms\ForgotPasswordValidator();
 
 if(list($formData, $errors) = $validator->validate()) {
     if($errors) {
         $content = forgotPassword($formData, $errors);
     }
     else {
-        $resetPasswordModel = ModelFactory::get('vanilla\db\ResetPasswordModel');
+        $resetPasswordModel = ModelFactory::get('scrnnm\db\ResetPasswordModel');
         $resetPasswordModel->createToken($formData['email']);
         $content = sprintf("If the email address you entered, %s,
             is associated with a user account, then you will receive

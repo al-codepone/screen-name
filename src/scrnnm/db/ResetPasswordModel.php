@@ -1,9 +1,9 @@
 <?php
 
-namespace vanilla\db;
+namespace scrnnm\db;
 
 use cityphp\db\DatabaseHandle;
-use vanilla\db\ModelFactory;
+use scrnnm\db\ModelFactory;
 
 class ResetPasswordModel extends TokenModel {
     public function __construct(DatabaseHandle $databaseHandle) {
@@ -11,7 +11,7 @@ class ResetPasswordModel extends TokenModel {
     }
 
     public function createToken($email) {
-        $userModel = ModelFactory::get('vanilla\db\UserModel');
+        $userModel = ModelFactory::get('scrnnm\db\UserModel');
         $userData = $userModel->getUserWithEmail($email);
 
         if($userData) {

@@ -1,12 +1,12 @@
 <?php
 
-use vanilla\db\ModelFactory;
+use scrnnm\db\ModelFactory;
 
-$resetPasswordModel = ModelFactory::get('vanilla\db\ResetPasswordModel');
+$resetPasswordModel = ModelFactory::get('scrnnm\db\ResetPasswordModel');
 $tokenData = $resetPasswordModel->getToken($_GET['id'], $_GET['token']);
 
 if($tokenData) {
-    $validator = new vanilla\forms\ResetPasswordValidator();
+    $validator = new scrnnm\forms\ResetPasswordValidator();
 
     if(list($formData, $errors) = $validator->validate()) {
         if($errors) {

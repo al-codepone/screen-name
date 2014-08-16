@@ -1,7 +1,7 @@
 <?php
 
 define('SITE', 'localhost');
-define('ROOT', '/cityphp/sample-applications/vanilla/deploy/');
+define('ROOT', '/screen-name/public/');
 define('CSS', ROOT . 'css/');
 define('JS', ROOT . 'js/');
 define('SIGN_UP', ROOT . 'signup');

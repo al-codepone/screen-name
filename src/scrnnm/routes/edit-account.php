@@ -1,6 +1,6 @@
 <?php
 
-$validator = new vanilla\forms\EditAccountValidator();
+$validator = new scrnnm\forms\EditAccountValidator();
 
 if(!$user) {
     $content = 'Log in to edit your account.';

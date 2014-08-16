@@ -1,6 +1,6 @@
 <?php
 
-namespace vanilla\db;
+namespace scrnnm\db;
 
 use cityphp\db\AdapterFactory;
 use cityphp\db\Mysql;

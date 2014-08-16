@@ -1,7 +1,7 @@
 <?php
 
 
-namespace vanilla\forms;
+namespace scrnnm\forms;
 
 use cityphp\forms\FormValidator;
 

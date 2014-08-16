@@ -1,14 +1,13 @@
 <?php
 
-require 'const.php';
-require 'vendor/autoload.php';
+require 'boot.php';
 
-use vanilla\db\ModelFactory;
+use scrnnm\db\ModelFactory;
 
 $modelNames = array(
-    'vanilla\db\LoginModel',
-    'vanilla\db\VerifyEmailModel',
-    'vanilla\db\ResetPasswordModel');
+    'scrnnm\db\LoginModel',
+    'scrnnm\db\VerifyEmailModel',
+    'scrnnm\db\ResetPasswordModel');
 
 foreach($modelNames as $modelName) {
     $model = ModelFactory::get($modelName);
