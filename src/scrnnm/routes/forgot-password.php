@@ -24,5 +24,3 @@ else {
 }
 
 $head = '<title>Forgot Password</title>';
-
-?>

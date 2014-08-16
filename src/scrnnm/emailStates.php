@@ -7,5 +7,3 @@ function emailStates($userData, $formData) {
         'is_changed' => $userData['email'] && $formData['email']
             && $userData['email'] != $formData['email']);
 }
-
-?>

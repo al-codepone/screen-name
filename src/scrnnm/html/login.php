@@ -30,5 +30,3 @@ function login(array $formData, $errors = array()) {
 
         . '</form>';
 }
-
-?>

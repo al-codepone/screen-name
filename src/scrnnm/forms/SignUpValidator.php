@@ -38,5 +38,3 @@ class SignUpValidator extends FormValidator {
         }
     }
 }
-
-?>

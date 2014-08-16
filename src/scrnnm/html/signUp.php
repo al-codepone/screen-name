@@ -31,5 +31,3 @@ function signUp(array $formData, $errors = array()) {
 
         . '</form>';
 }
-
-?>

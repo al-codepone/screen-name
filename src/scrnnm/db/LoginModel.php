@@ -68,5 +68,3 @@ class LoginModel extends TokenModel {
             'username' => $_SESSION[SESSION_USERNAME]);
     }
 }
-
-?>

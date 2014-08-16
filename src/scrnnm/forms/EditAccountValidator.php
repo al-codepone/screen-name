@@ -43,5 +43,3 @@ class EditAccountValidator extends FormValidator {
         }
     }
 }
-
-?>

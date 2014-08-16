@@ -5,5 +5,3 @@ function validateUsername($value) {
         return 'Username must be 4-16 characters and use letters, numbers and dashes only';
     }
 }
-
-?>

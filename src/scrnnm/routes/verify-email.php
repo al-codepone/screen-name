@@ -18,5 +18,3 @@ else {
 }
 
 $head = '<title>Verify Email</title>';
-
-?>

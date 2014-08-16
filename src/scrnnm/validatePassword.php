@@ -5,5 +5,3 @@ function validatePassword($value, $inputName) {
         return invalidPassword($inputName);
     }
 }
-
-?>

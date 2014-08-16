@@ -133,5 +133,3 @@ class UserModel extends DatabaseAdapter {
         return $queryData[0];
     }
 }
-
-?>

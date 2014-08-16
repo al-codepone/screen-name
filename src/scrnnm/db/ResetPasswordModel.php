@@ -34,5 +34,3 @@ class ResetPasswordModel extends TokenModel {
         parent::deleteToken($tokenID);
     }
 }
-
-?>

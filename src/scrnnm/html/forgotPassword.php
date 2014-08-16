@@ -20,5 +20,3 @@ function forgotPassword(array $formData, $errors = array()) {
 
         . '</form>';
 }
-
-?>

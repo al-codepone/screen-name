@@ -15,5 +15,3 @@ foreach($modelNames as $modelName) {
 }
 
 echo 'prune successful';
-
-?>

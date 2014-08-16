@@ -68,5 +68,3 @@ abstract class TokenModel extends DatabaseAdapter {
             $tokenID));
     }    
 }
-
-?>

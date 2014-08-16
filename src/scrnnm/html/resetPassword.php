@@ -21,5 +21,3 @@ function resetPassword(array $formData, $errors = array()) {
 
         . '</form>';
 }
-
-?>

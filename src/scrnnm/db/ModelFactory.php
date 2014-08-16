@@ -18,5 +18,3 @@ class ModelFactory extends AdapterFactory {
             MYSQL_DEBUG);
     }
 }
-
-?>

@@ -15,5 +15,3 @@ class LoginValidator extends FormValidator {
                 'remember_me'));
     }
 }
-
-?>

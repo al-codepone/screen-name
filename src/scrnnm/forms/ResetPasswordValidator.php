@@ -25,5 +25,3 @@ class ResetPasswordValidator extends FormValidator {
         }
     }
 }
-
-?>

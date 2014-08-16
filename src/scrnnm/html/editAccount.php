@@ -45,5 +45,3 @@ function editAccount(array $formData, $errors = array()) {
 
         . '</form>';
 }
-
-?>

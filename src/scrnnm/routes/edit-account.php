@@ -34,5 +34,3 @@ else {
 
 $head = '<title>Edit Account</title>
     <script src="' . JS . 'edit-account.js"></script>';
-
-?>

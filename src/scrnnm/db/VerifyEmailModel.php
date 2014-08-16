@@ -28,5 +28,3 @@ class VerifyEmailModel extends TokenModel {
         parent::deleteToken($tokenID);
     }
 }
-
-?>

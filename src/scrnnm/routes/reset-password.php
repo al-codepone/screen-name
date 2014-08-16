@@ -30,5 +30,3 @@ else {
 }
 
 $head = '<title>Reset Password</title>';
-
-?>

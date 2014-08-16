@@ -13,5 +13,3 @@ function navItems($user) {
             <li><a href="%s">log in</a></li>',
             ROOT, SIGN_UP, LOGIN);
 }
-
-?>

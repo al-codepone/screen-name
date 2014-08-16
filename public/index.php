@@ -22,5 +22,3 @@ include '../src/scrnnm/routes/' . route(array(
 
 $navItems = navItems($user);
 include '../src/scrnnm/html/template.php';
-
-?>

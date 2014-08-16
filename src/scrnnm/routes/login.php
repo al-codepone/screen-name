@@ -23,5 +23,3 @@ else {
 }
 
 $head = '<title>Log In</title>';
-
-?>

@@ -26,5 +26,3 @@ else {
 }
 
 $head = '<title>Sign Up</title>';
-
-?>

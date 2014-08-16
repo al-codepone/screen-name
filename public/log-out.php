@@ -11,5 +11,3 @@ $loginModel = ModelFactory::get('scrnnm\db\LoginModel');
 $loginModel->logOut();
 header('Location:' . ROOT);
 exit();
-
-?>

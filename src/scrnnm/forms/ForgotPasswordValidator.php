@@ -15,5 +15,3 @@ class ForgotPasswordValidator extends FormValidator {
         }
     }
 }
-
-?>

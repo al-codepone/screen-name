@@ -17,5 +17,3 @@ function accountUpdated($userData, $formData) {
 
     return "Your account has been updated.$sentence";
 }
-
-?>

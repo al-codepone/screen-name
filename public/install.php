@@ -16,5 +16,3 @@ foreach($modelNames as $modelName) {
 }
 
 printf('Install successful. Visit the <a href="%s">home page</a>.', ROOT);
-
-?>

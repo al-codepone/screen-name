@@ -14,5 +14,3 @@ message: $message\n\n\n\n";
         file_put_contents(EMAIL_LOG_FILE, $data, FILE_APPEND);
     }
 }
-
-?>
