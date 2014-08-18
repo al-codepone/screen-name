@@ -2,8 +2,8 @@
 
 namespace scrnnm\db;
 
-use cityphp\db\DatabaseAdapter;
-use cityphp\db\DatabaseHandle;
+use pjsql\DatabaseAdapter;
+use pjsql\DatabaseHandle;
 
 abstract class TokenModel extends DatabaseAdapter {
     private $tableName;

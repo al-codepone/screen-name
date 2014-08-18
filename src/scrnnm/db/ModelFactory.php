@@ -2,19 +2,12 @@
 
 namespace scrnnm\db;
 
-use cityphp\db\AdapterFactory;
-use cityphp\db\Mysql;
-
-class ModelFactory extends AdapterFactory {
+class ModelFactory extends \pjsql\AdapterFactory {
     protected static function databaseHandle() {
-        return new Mysql(
+        return new \pjsql\Mysql(
             MYSQL_HOST,
             MYSQL_USERNAME,
             MYSQL_PASSWORD,
-            MYSQL_DBNAME,
-            null,
-            null,
-            'database error',
-            MYSQL_DEBUG);
+            MYSQL_DBNAME);
     }
 }

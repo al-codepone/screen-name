@@ -2,8 +2,7 @@
 
 namespace scrnnm\db;
 
-use cityphp\db\DatabaseHandle;
-use scrnnm\db\ModelFactory;
+use pjsql\DatabaseHandle;
 
 class ResetPasswordModel extends TokenModel {
     public function __construct(DatabaseHandle $databaseHandle) {

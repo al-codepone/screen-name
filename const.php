@@ -16,7 +16,6 @@ define('MYSQL_HOST', 'localhost');
 define('MYSQL_USERNAME', 'big');
 define('MYSQL_PASSWORD', 'tree');
 define('MYSQL_DBNAME', 'myfirstdb');
-define('MYSQL_DEBUG', false);
 
 define('TABLE_USERS', 'users');
 define('TABLE_PERSISTENT_LOGIN_TOKENS', 'persistent_login_tokens');

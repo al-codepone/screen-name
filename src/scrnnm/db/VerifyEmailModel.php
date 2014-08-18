@@ -2,7 +2,7 @@
 
 namespace scrnnm\db;
 
-use cityphp\db\DatabaseHandle;
+use pjsql\DatabaseHandle;
 
 class VerifyEmailModel extends TokenModel {
     public function __construct(DatabaseHandle $databaseHandle) {

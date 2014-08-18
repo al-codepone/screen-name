@@ -2,8 +2,7 @@
 
 namespace scrnnm\db;
 
-use cityphp\db\DatabaseAdapter;
-use scrnnm\db\ModelFactory;
+use pjsql\DatabaseAdapter;
 
 class UserModel extends DatabaseAdapter {
     public function install() {
