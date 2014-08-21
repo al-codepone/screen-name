@@ -1,6 +1,6 @@
 <?php
 
-$validator = new scrnnm\forms\SignUpValidator();
+$validator = new scrnnm\validator\SignUpValidator();
 
 if($user) {
     $content = 'You are already signed up.';

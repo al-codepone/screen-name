@@ -2,7 +2,7 @@
 
 use scrnnm\db\ModelFactory;
 
-$validator = new scrnnm\forms\ForgotPasswordValidator();
+$validator = new scrnnm\validator\ForgotPasswordValidator();
 
 if(list($formData, $errors) = $validator->validate()) {
     if($errors) {

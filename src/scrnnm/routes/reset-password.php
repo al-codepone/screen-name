@@ -6,7 +6,7 @@ $resetPasswordModel = ModelFactory::get('scrnnm\db\ResetPasswordModel');
 $tokenData = $resetPasswordModel->getToken($_GET['id'], $_GET['token']);
 
 if($tokenData) {
-    $validator = new scrnnm\forms\ResetPasswordValidator();
+    $validator = new scrnnm\validator\ResetPasswordValidator();
 
     if(list($formData, $errors) = $validator->validate()) {
         if($errors) {
