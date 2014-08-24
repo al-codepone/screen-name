@@ -2,9 +2,7 @@
 
 namespace scrnnm\validator;
 
-use cityphp\forms\FormValidator;
-
-class ForgotPasswordValidator extends FormValidator {
+class ForgotPasswordValidator extends \bbook\FormValidator {
     public function __construct() {
         parent::__construct(array('email'));
     }

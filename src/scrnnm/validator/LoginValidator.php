@@ -2,9 +2,7 @@
 
 namespace scrnnm\validator;
 
-use cityphp\forms\FormValidator;
-
-class LoginValidator extends FormValidator {
+class LoginValidator extends \bbook\FormValidator {
     public function __construct() {
         parent::__construct(
             array(

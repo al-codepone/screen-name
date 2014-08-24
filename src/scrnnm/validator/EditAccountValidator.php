@@ -2,9 +2,7 @@
 
 namespace scrnnm\validator;
 
-use cityphp\forms\FormValidator;
-
-class EditAccountValidator extends FormValidator {
+class EditAccountValidator extends \bbook\FormValidator {
     public function __construct() {
         parent::__construct(array(
             'delete_flag' => false,
@@ -37,7 +35,7 @@ class EditAccountValidator extends FormValidator {
         }
     }
 
-    protected function validateMore($values) {
+    protected function more($values) {
         if($values['password'] != $values['confirm_password']) {
             return "New passwords didn't match";
         }

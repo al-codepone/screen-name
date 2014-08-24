@@ -2,9 +2,7 @@
 
 namespace scrnnm\validator;
 
-use cityphp\forms\FormValidator;
-
-class ResetPasswordValidator extends FormValidator {
+class ResetPasswordValidator extends \bbook\FormValidator {
     public function __construct() {
         parent::__construct(array(
             'password',
@@ -19,7 +17,7 @@ class ResetPasswordValidator extends FormValidator {
         return validatePassword($value, 'Confirm new password');
     }
 
-    protected function validateMore($values) {
+    protected function more($values) {
         if($values['password'] != $values['confirm_password']) {
             return "Passwords didn't match";
         }

@@ -1,11 +1,8 @@
 <?php
 
-
 namespace scrnnm\validator;
 
-use cityphp\forms\FormValidator;
-
-class SignUpValidator extends FormValidator {
+class SignUpValidator extends \bbook\FormValidator {
     public function __construct() {
         parent::__construct(array(
             'username',
@@ -32,7 +29,7 @@ class SignUpValidator extends FormValidator {
         return validatePassword($value, 'Confirm password');
     }
 
-    protected function validateMore($values) {
+    protected function more($values) {
         if($values['password'] != $values['confirm_password']) {
             return "Passwords didn't match";
         }

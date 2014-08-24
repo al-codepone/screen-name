@@ -3,8 +3,52 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "953b4f20c9ed182c423872392c1b70a8",
+    "hash": "47fdfb2bb8d766afade325e6270808df",
     "packages": [
+        {
+            "name": "bouncers-book/bouncers-book",
+            "version": "0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/al-codepone/bouncers-book.git",
+                "reference": "a74e3659ef09778fbbaf3879b2ba33b154576b31"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/al-codepone/bouncers-book/zipball/a74e3659ef09778fbbaf3879b2ba33b154576b31",
+                "reference": "a74e3659ef09778fbbaf3879b2ba33b154576b31",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "bbook\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ry Ferguson",
+                    "email": "rytf12@gmail.com",
+                    "homepage": "http://ikitovagn.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP form validator",
+            "homepage": "https://github.com/al-codepone/bouncers-book",
+            "keywords": [
+                "Forms",
+                "form",
+                "validator"
+            ],
+            "time": "2014-08-12 17:31:36"
+        },
         {
             "name": "cityphp/cityphp",
             "version": "0.4.0",
