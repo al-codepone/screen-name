@@ -2,7 +2,8 @@
     "require": {
         "cityphp/cityphp": "0.4.0",
         "pajamasql/pajamasql": "0.5.0",
-        "bouncers-book/bouncers-book": "0.5.0"
+        "bouncers-book/bouncers-book": "0.5.0",
+        "corn-wand/corn-wand": "0.5.1"
     },
     "autoload": {
         "psr-0": {"scrnnm\\": "src/"},
@@ -21,7 +22,7 @@
             "src/scrnnm/html/login.php",
             "src/scrnnm/html/navItems.php",
             "src/scrnnm/html/resetPassword.php",
-            "src/scrnnm/html/signUp.php"
+            "src/scrnnm/html/sign-up.php"
         ]
     }
 }

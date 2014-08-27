@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "47fdfb2bb8d766afade325e6270808df",
+    "hash": "3135bfa12121c59a47cd56dbfa5bd184",
     "packages": [
         {
             "name": "bouncers-book/bouncers-book",
@@ -112,6 +112,51 @@
                 "sql"
             ],
             "time": "2014-01-21 02:10:56"
+        },
+        {
+            "name": "corn-wand/corn-wand",
+            "version": "0.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/al-codepone/corn-wand.git",
+                "reference": "a2910783c2922ab0922917dc64080dfc491dec13"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/al-codepone/corn-wand/zipball/a2910783c2922ab0922917dc64080dfc491dec13",
+                "reference": "a2910783c2922ab0922917dc64080dfc491dec13",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/corn-wand.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ry Ferguson",
+                    "email": "rytf12@gmail.com",
+                    "homepage": "http://ikitovagn.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP functional library for generating HTML",
+            "homepage": "https://github.com/al-codepone/corn-wand",
+            "keywords": [
+                "function",
+                "functional",
+                "functions",
+                "html"
+            ],
+            "time": "2014-07-02 06:59:38"
         },
         {
             "name": "pajamasql/pajamasql",

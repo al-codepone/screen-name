@@ -7,10 +7,10 @@ if($user) {
 }
 else if(list($formData, $errors) = $validator->validate()) {
     if($errors) {
-        $content = signUp($formData, $errors);
+        $content = sign_up($formData, $errors);
     }
     else if($error = $userModel->createUser($formData)) {
-        $content = signUp($formData, $error);
+        $content = sign_up($formData, $error);
     }
     else {
         $content = sprintf('Thank you for signing up.
@@ -22,7 +22,7 @@ else if(list($formData, $errors) = $validator->validate()) {
 }
 else {
     $autofocus = autofocus('username');
-    $content = signUp($validator->values());
+    $content = sign_up($validator->values());
 }
 
 $head = '<title>Sign Up</title>';
