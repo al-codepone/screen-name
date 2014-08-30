@@ -1,32 +1,29 @@
 <?php
 
-function login(array $formData, $errors = array()) {
-    return
-        '<form method="post">'
-        . blist($errors, array('class' => 'error'))
-        . input(array(
-            'id' => 'username',
-            'value' => $formData['username']),
-            'Username')
+function login(array $form_data, $errors = array()) {
+    return c\form(
+        array('method' => 'post'),
+        c\ulist($errors, array('class' => 'error')),
+        c\dlinput(
+            'Username',
+            array(
+                'id' => 'username',
+                'value' => $form_data['username'])),
 
-        . input(array(
-            'id' => 'password',
-            'type' => 'password'),
-            'Password')
+        c\dlinput(
+            'Password',
+            array(
+                'id' => 'password',
+                'type' => 'password')),
 
-        . input(array(
-            'id' => 'remember_me',
-            'value' => 1,
-            'type' => 'checkbox',
-            $formData['remember_me'] ? 'checked' : ''),
-            'Remember Me')
+        c\dlinput(
+            'Remember Me',
+            array(
+                'id' => 'remember_me',
+                'value' => 1,
+                'type' => 'checkbox',
+                $form_data['remember_me'] ? 'checked' : '')),
 
-        . sprintf('<div><a href="%s">forgot password</a></div>',
-            FORGOT_PASSWORD)
-
-        . input(array(
-            'type' => 'submit',
-            'value' => 'Log In'))
-
-        . '</form>';
+        c\div(c\hlink(FORGOT_PASSWORD, 'forgot password')),
+        c\div('<input type="submit" value="Log In"/>'));
 }
