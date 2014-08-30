@@ -29,5 +29,5 @@ function sign_up(array $form_data, $errors = array()) {
                 'id' => 'confirm_password',
                 'type' => 'password')),
 
-        c\div('<input type="submit" value="Sign Up"'));
+        c\div('<input type="submit" value="Sign Up"/>'));
 }
