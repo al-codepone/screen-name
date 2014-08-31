@@ -1,22 +1,18 @@
 <?php
 
-function forgotPassword(array $formData, $errors = array()) {
-    return
-        '<form method="post">'
-        . "<div>Submit your account email and we'll send you
-            directions for resetting your password.</div>"
+function forgotPassword(array $form_data, $errors = array()) {
+    return c\form(
+        array('method' => 'post'),
+        c\div("Submit your account email and we'll send you
+            directions for resetting your password."),
 
-        . blist($errors, array('class' => 'error'))
+        c\ulist($errors, array('class' => 'error')),
+        c\dlinput(
+            'Email',
+            array(
+                'id' => 'email',
+                'value' => $form_data['email'],
+                'type' => 'email')),
 
-        . input(array(
-            'id' => 'email',
-            'value' => $formData['email'],
-            'type' => 'email'),
-            'Email')
-
-        . input(array(
-            'type' => 'submit',
-            'value' => 'Submit'))
-
-        . '</form>';
+        c\div('<input type="submit" value="Submit"/>'));
 }
