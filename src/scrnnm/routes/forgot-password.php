@@ -6,7 +6,7 @@ $validator = new scrnnm\validator\ForgotPasswordValidator();
 
 if(list($formData, $errors) = $validator->validate()) {
     if($errors) {
-        $content = forgotPassword($formData, $errors);
+        $content = forgot_password($formData, $errors);
     }
     else {
         $resetPasswordModel = ModelFactory::get('scrnnm\db\ResetPasswordModel');
@@ -20,7 +20,7 @@ if(list($formData, $errors) = $validator->validate()) {
 }
 else {
     $autofocus = autofocus('email');
-    $content = forgotPassword($validator->values());
+    $content = forgot_password($validator->values());
 }
 
 $head = '<title>Forgot Password</title>';

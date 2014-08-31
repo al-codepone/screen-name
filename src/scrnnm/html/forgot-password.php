@@ -1,6 +1,6 @@
 <?php
 
-function forgotPassword(array $form_data, $errors = array()) {
+function forgot_password(array $form_data, $errors = array()) {
     return c\form(
         array('method' => 'post'),
         c\div("Submit your account email and we'll send you
