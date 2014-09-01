@@ -17,7 +17,6 @@ define('MYSQL_USERNAME', 'big');
 define('MYSQL_PASSWORD', 'tree');
 define('MYSQL_DBNAME', 'myfirstdb');
 
-define('TABLE_USERS', 'users');
 define('TABLE_PERSISTENT_LOGIN_TOKENS', 'persistent_login_tokens');
 define('TABLE_VERIFY_EMAIL_TOKENS', 'verify_email_tokens');
 define('TABLE_RESET_PASSWORD_TOKENS', 'reset_password_tokens');

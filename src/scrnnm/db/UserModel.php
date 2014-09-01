@@ -6,7 +6,7 @@ use pjsql\DatabaseAdapter;
 
 class UserModel extends DatabaseAdapter {
     public function install() {
-        $this->exec('CREATE TABLE ' . TABLE_USERS . ' (
+        $this->exec('CREATE TABLE tuser (
             user_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
             username VARCHAR(32) UNIQUE,
             email VARCHAR(255) DEFAULT "",
@@ -23,8 +23,7 @@ class UserModel extends DatabaseAdapter {
             return emailTaken($data['email']);
         }
         else {
-            $this->exec(sprintf('INSERT INTO %s (username, password) VALUES("%s", "%s")',
-                TABLE_USERS,
+            $this->exec(sprintf('INSERT INTO tuser (username, password) VALUES("%s", "%s")',
                 $this->esc($data['username']),
                 $this->esc(bcryptHash($data['password'], BCRYPT_COST))));
 
@@ -81,8 +80,7 @@ class UserModel extends DatabaseAdapter {
             ? sprintf(', password = "%s"', $this->esc(bcryptHash($formData['password'], BCRYPT_COST)))
             : '';
 
-        $this->exec(sprintf('UPDATE %s SET username = "%s"%s WHERE user_id = %d',
-            TABLE_USERS,
+        $this->exec(sprintf('UPDATE tuser SET username = "%s"%s WHERE user_id = %d',
             $this->esc($formData['username']),
             $setPassword,
             $userID));
@@ -96,15 +94,13 @@ class UserModel extends DatabaseAdapter {
             return emailTaken($email);
         }
 
-        $this->exec(sprintf('UPDATE %s SET email = "%s" WHERE user_id = %d',
-            TABLE_USERS,
+        $this->exec(sprintf('UPDATE tuser SET email = "%s" WHERE user_id = %d',
             $this->esc($email),
             $userID));
     }
 
     public function updatePassword($userID, $data) {
-        $this->exec(sprintf('UPDATE %s SET password = "%s" WHERE user_id = %d',
-            TABLE_USERS,
+        $this->exec(sprintf('UPDATE tuser SET password = "%s" WHERE user_id = %d',
             $this->esc(bcryptHash($data['password'], BCRYPT_COST)),
             $userID));
     }
@@ -116,8 +112,7 @@ class UserModel extends DatabaseAdapter {
             return 'Incorrect current password';
         }
 
-        $this->exec(sprintf('DELETE FROM %s WHERE user_id = %d',
-            TABLE_USERS,
+        $this->exec(sprintf('DELETE FROM tuser WHERE user_id = %d',
             $userID));
 
         unset($_SESSION[SESSION_USER_ID]);
@@ -125,8 +120,7 @@ class UserModel extends DatabaseAdapter {
 
     protected function getUser($condition) {
         $queryData = $this->query(sprintf('SELECT user_id, username, email, password
-            FROM %s WHERE %s',
-            TABLE_USERS,
+            FROM tuser WHERE %s',
             $condition));
 
         return $queryData[0];

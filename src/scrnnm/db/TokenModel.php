@@ -46,11 +46,10 @@ abstract class TokenModel extends DatabaseAdapter {
 
     protected function getToken($userID, $token) {
         $query = sprintf('SELECT t.token_id, t.token, t.data, u.user_id, u.username
-            FROM %s t JOIN %s u ON t.user_id = u.user_id
+            FROM %s t JOIN tuser u ON t.user_id = u.user_id
             WHERE t.user_id = %d AND t.creation_date > "%s" - INTERVAL %d DAY
             ORDER BY t.creation_date DESC',
             $this->tableName,
-            TABLE_USERS,
             $userID,
             datetimeNow(),
             $this->ttl);
