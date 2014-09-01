@@ -1,6 +1,6 @@
 <?php
 
-function navItems($user) {
+function nav_items($user) {
     return $user
         ? c\li(c\hlink(ROOT, 'home')) .
           c\li(c\hlink(EDIT_ACCOUNT, 'edit account')) .

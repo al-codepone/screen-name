@@ -20,5 +20,5 @@ include '../src/scrnnm/routes/' . route(array(
     'forgot-password' => 'forgot-password.php',
     'reset-password' => 'reset-password.php'));
 
-$navItems = navItems($user);
+$navItems = nav_items($user);
 include '../src/scrnnm/html/template.php';

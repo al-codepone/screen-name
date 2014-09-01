@@ -20,7 +20,7 @@
             "src/scrnnm/html/editAccount.php",
             "src/scrnnm/html/forgot-password.php",
             "src/scrnnm/html/login.php",
-            "src/scrnnm/html/navItems.php",
+            "src/scrnnm/html/nav-items.php",
             "src/scrnnm/html/reset-password.php",
             "src/scrnnm/html/sign-up.php"
         ]
