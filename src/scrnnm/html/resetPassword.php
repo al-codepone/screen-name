@@ -1,23 +1,21 @@
 <?php
 
-function resetPassword(array $formData, $errors = array()) {
-    return
-        '<form method="post">
-        <div>Use this form to reset your password.</div>'
-        . blist($errors, array('class' => 'error'))
-        . input(array(
-            'id' => 'password',
-            'type' => 'password'),
-            'New Password')
+function resetPassword(array $form_data, $errors = array()) {
+    return c\form(
+        array('method' => 'post'),
+        c\div('Use this form to reset your password.'),
+        c\ulist($errors, array('class' => 'error')),
+        c\dlinput(
+            'New Password',
+            array(
+                'id' => 'password',
+                'type' => 'password')),
 
-        . input(array(
-            'id' => 'confirm_password',
-            'type' => 'password'),
-            'Confirm New Password')
+        c\dlinput(
+            'Confirm New Password',
+            array(
+                'id' => 'confirm_password',
+                'type' => 'password')),
 
-        . input(array(
-            'type' => 'submit',
-            'value' => 'Reset'))
-
-        . '</form>';
+        c\div('<input type="submit" value="Reset"/>'));
 }
