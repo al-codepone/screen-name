@@ -1,15 +1,13 @@
 <?php
 
 function navItems($user) {
-    return $user 
-        ? sprintf('<li><a href="%s">home</a></li>
-            <li><a href="%s">edit account</a></li>
-            <li><a href="%s">log out</a></li>
-            <li>%s</li>',
-            ROOT, EDIT_ACCOUNT, LOG_OUT, $user['username'])
+    return $user
+        ? c\li(c\hlink(ROOT, 'home')) .
+          c\li(c\hlink(EDIT_ACCOUNT, 'edit account')) .
+          c\li(c\hlink(LOG_OUT, 'log out')) .
+          c\li(c\esc($user['username']))
 
-        : sprintf('<li><a href="%s">home</a></li>
-            <li><a href="%s">sign up</a></li>
-            <li><a href="%s">log in</a></li>',
-            ROOT, SIGN_UP, LOGIN);
+        : c\li(c\hlink(ROOT, 'home')) .
+          c\li(c\hlink(SIGN_UP, 'sign up')) .
+          c\li(c\hlink(LOGIN, 'log in'));
 }
