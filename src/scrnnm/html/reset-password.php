@@ -1,6 +1,6 @@
 <?php
 
-function resetPassword(array $form_data, $errors = array()) {
+function reset_password(array $form_data, $errors = array()) {
     return c\form(
         array('method' => 'post'),
         c\div('Use this form to reset your password.'),

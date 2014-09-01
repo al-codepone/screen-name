@@ -10,10 +10,10 @@ if($tokenData) {
 
     if(list($formData, $errors) = $validator->validate()) {
         if($errors) {
-            $content = resetPassword($formData, $errors);
+            $content = reset_password($formData, $errors);
         }
         else if($error = $userModel->updatePassword($tokenData['user_id'], $formData)) {
-            $content = resetPassword($formData, $error);
+            $content = reset_password($formData, $error);
         }
         else {
             $resetPasswordModel->deleteToken($tokenData['token_id']);
@@ -22,7 +22,7 @@ if($tokenData) {
     }
     else {
         $autofocus = autofocus('password');
-        $content = resetPassword($validator->values());
+        $content = reset_password($validator->values());
     }
 }
 else {
