@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "703810bf404484cb7af882ea0d6085b4",
+    "hash": "2186221fb8f94ed0b345b9213c4a6cbe",
     "packages": [
         {
             "name": "bouncers-book/bouncers-book",

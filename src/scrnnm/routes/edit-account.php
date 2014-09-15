@@ -8,18 +8,18 @@ if(!$user) {
 else if(list($formData, $errors) = $validator->validate()) {
     if($formData['delete_flag']) {
         $content = ($error = $userModel->deleteUser($user['user_id'], $formData))
-            ? editAccount($formData, $error)
+            ? edit_account($formData, $error)
             : 'Your account was successfully deleted.';
 
         $user = $error ? $user : null;
     }
     else if($errors) {
-        $content = editAccount($formData, $errors);
+        $content = edit_account($formData, $errors);
     }
     else {
         $content = is_array($result = $userModel->updateUser($user['user_id'], $formData))
             ? accountUpdated($result, $formData)
-            : editAccount($formData, $result);
+            : edit_account($formData, $result);
 
         $user['username'] = is_array($result) ? $formData['username'] : $user['username'];
     }
@@ -29,7 +29,7 @@ else {
     $formData = $validator->values();
     $formData['username'] = $userData['username'];
     $formData['email'] = $userData['email'];
-    $content = editAccount($formData);
+    $content = edit_account($formData);
 }
 
 $head = '<title>Edit Account</title>

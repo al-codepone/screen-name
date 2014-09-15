@@ -1,6 +1,6 @@
 <?php
 
-function editAccount(array $form_data, $errors = array()) {
+function edit_account(array $form_data, $errors = array()) {
     return c\form(
         array(
             'method' => 'post',
