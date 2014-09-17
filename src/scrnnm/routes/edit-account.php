@@ -18,7 +18,7 @@ else if(list($formData, $errors) = $validator->validate()) {
     }
     else {
         $content = is_array($result = $userModel->updateUser($user['user_id'], $formData))
-            ? accountUpdated($result, $formData)
+            ? account_updated($result, $formData)
             : edit_account($formData, $result);
 
         $user['username'] = is_array($result) ? $formData['username'] : $user['username'];

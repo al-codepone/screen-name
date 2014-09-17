@@ -16,7 +16,7 @@
             "src/scrnnm/usernameTaken.php",
             "src/scrnnm/validatePassword.php",
             "src/scrnnm/validateUsername.php",
-            "src/scrnnm/html/accountUpdated.php",
+            "src/scrnnm/html/account-updated.php",
             "src/scrnnm/html/edit-account.php",
             "src/scrnnm/html/forgot-password.php",
             "src/scrnnm/html/login.php",
