@@ -22,4 +22,4 @@ else {
     $content = login($validator->values());
 }
 
-$head = '<title>Log In</title>';
+$head = c\title('Log In');

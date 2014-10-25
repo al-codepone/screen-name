@@ -17,4 +17,4 @@ else {
     $content = 'Invalid verification.';
 }
 
-$head = '<title>Verify Email</title>';
+$head = c\title('Verify Email');

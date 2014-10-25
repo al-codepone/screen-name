@@ -25,4 +25,4 @@ else {
     $content = sign_up($validator->values());
 }
 
-$head = '<title>Sign Up</title>';
+$head = c\title('Sign Up');
