@@ -30,7 +30,7 @@ abstract class TokenModel extends DatabaseAdapter {
         $this->exec(sprintf('DELETE FROM %s
             WHERE creation_date < "%s" - INTERVAL %d DAY',
             $this->tableName,
-            datetimeNow(),
+            \pc\datetime_now(),
             $this->ttl));
     }
 
@@ -39,9 +39,9 @@ abstract class TokenModel extends DatabaseAdapter {
             VALUES(%d, "%s", "%s", "%s")',
             $this->tableName,
             $userID,
-            $this->esc(bcryptHash($token, BCRYPT_COST)),
+            $this->esc(\pc\bcrypt_hash($token, BCRYPT_COST)),
             $this->esc($data),
-            datetimeNow()));
+            \pc\datetime_now()));
     }
 
     protected function getToken($userID, $token) {
@@ -51,11 +51,11 @@ abstract class TokenModel extends DatabaseAdapter {
             ORDER BY t.creation_date DESC',
             $this->tableName,
             $userID,
-            datetimeNow(),
+            \pc\datetime_now(),
             $this->ttl);
 
         foreach($this->query($query) as $row) {
-            if($row['token'] == bcryptHash($token, $row['token'])) {
+            if($row['token'] == \pc\bcrypt_hash($token, $row['token'])) {
                 return $row;
             }
         }

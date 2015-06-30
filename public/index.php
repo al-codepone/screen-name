@@ -11,7 +11,7 @@ $userModel = ModelFactory::get('scrnnm\db\UserModel');
 $loginModel = ModelFactory::get('scrnnm\db\LoginModel');
 $user = $loginModel->getActiveUser();
 
-include '../src/scrnnm/routes/' . route(array(
+include '../src/scrnnm/routes/' . pc\route(array(
     null => 'home.php',
     'signup' => 'sign-up.php',
     'login' => 'login.php',

@@ -21,7 +21,7 @@ else if(list($formData, $errors) = $validator->validate()) {
     }
 }
 else {
-    $autofocus = autofocus('username');
+    $autofocus = c\focus('username');
     $content = sign_up($validator->values());
 }
 

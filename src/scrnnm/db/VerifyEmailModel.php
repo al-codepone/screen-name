@@ -10,7 +10,7 @@ class VerifyEmailModel extends TokenModel {
     }
 
     public function createToken($userID, $username, $email) {
-        $token = sha1Token();
+        $token = \pc\sha1_token();
         $subject = 'Verify Your Email';
         $additionalHeaders = sprintf("From: %s\r\n", EMAIL_FROM);
         $message = sprintf("%s,\n\nClick the link to verify your email:\n\n%s%s%d/%s",

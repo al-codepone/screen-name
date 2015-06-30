@@ -25,7 +25,7 @@ class UserModel extends DatabaseAdapter {
         else {
             $this->exec(sprintf('INSERT INTO tuser (username, password) VALUES("%s", "%s")',
                 $this->esc($data['username']),
-                $this->esc(bcryptHash($data['password'], BCRYPT_COST))));
+                $this->esc(\pc\bcrypt_hash($data['password'], BCRYPT_COST))));
 
             $userID = $this->conn()->insert_id;
 
@@ -57,7 +57,7 @@ class UserModel extends DatabaseAdapter {
         $emailUserData = $this->getUserWithEmail($formData['email']);
         $emailStates = emailStates($userData, $formData);
 
-        if($userData['password'] != bcryptHash($formData['current_password'], $userData['password'])) {
+        if($userData['password'] != \pc\bcrypt_hash($formData['current_password'], $userData['password'])) {
             return 'Incorrect current password';
         }
         else if($usernameUserData && $userID != $usernameUserData['user_id']) {
@@ -77,7 +77,7 @@ class UserModel extends DatabaseAdapter {
         }
 
         $setPassword = $formData['password']
-            ? sprintf(', password = "%s"', $this->esc(bcryptHash($formData['password'], BCRYPT_COST)))
+            ? sprintf(', password = "%s"', $this->esc(\pc\bcrypt_hash($formData['password'], BCRYPT_COST)))
             : '';
 
         $this->exec(sprintf('UPDATE tuser SET username = "%s"%s WHERE user_id = %d',
@@ -101,14 +101,14 @@ class UserModel extends DatabaseAdapter {
 
     public function updatePassword($userID, $data) {
         $this->exec(sprintf('UPDATE tuser SET password = "%s" WHERE user_id = %d',
-            $this->esc(bcryptHash($data['password'], BCRYPT_COST)),
+            $this->esc(\pc\bcrypt_hash($data['password'], BCRYPT_COST)),
             $userID));
     }
 
     public function deleteUser($userID, $formData) {
         $userData = $this->getUserWithUID($userID);
 
-        if($userData['password'] != bcryptHash($formData['current_password'], $userData['password'])) {
+        if($userData['password'] != \pc\bcrypt_hash($formData['current_password'], $userData['password'])) {
             return 'Incorrect current password';
         }
 

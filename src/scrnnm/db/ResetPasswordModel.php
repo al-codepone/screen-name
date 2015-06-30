@@ -14,7 +14,7 @@ class ResetPasswordModel extends TokenModel {
         $userData = $userModel->getUserWithEmail($email);
 
         if($userData) {
-            $token = sha1Token();
+            $token = \pc\sha1_token();
             $subject = 'Reset Your Password';
             $additionalHeaders = sprintf("From: %s\r\n", EMAIL_FROM);
             $message = sprintf("%s,\n\nUse this link to reset your password:\n\n%s%s%d/%s",

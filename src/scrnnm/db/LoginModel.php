@@ -13,7 +13,7 @@ class LoginModel extends TokenModel {
         $userModel = ModelFactory::get('scrnnm\db\UserModel');
         $userData = $userModel->getUserWithUsername($formData['username']);
 
-        if(!$userData || $userData['password'] != bcryptHash($formData['password'], $userData['password'])) {
+        if(!$userData || $userData['password'] != \pc\bcrypt_hash($formData['password'], $userData['password'])) {
             return 'Incorrect username and password';
         }
 
@@ -49,7 +49,7 @@ class LoginModel extends TokenModel {
     }
 
     private function createPersistentLogin($userID) {
-        $token = sha1Token();
+        $token = \pc\sha1_token();
         $this->createToken($userID, $token);
         setcookie(COOKIE_PERSISTENT_LOGIN, "$userID.$token",
             time() + 60*60*24*TTL_PERSISTENT_LOGIN);
