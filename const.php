@@ -1,5 +1,6 @@
 <?php
 
+define('SRC', 'C:/wamp/www/screen-name/src/');
 define('SITE', 'localhost');
 define('ROOT', '/screen-name/public/');
 define('CSS', ROOT . 'css/');

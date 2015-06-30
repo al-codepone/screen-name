@@ -11,7 +11,7 @@ $userModel = ModelFactory::get('scrnnm\db\UserModel');
 $loginModel = ModelFactory::get('scrnnm\db\LoginModel');
 $user = $loginModel->getActiveUser();
 
-include '../src/scrnnm/routes/' . pc\route(array(
+include SRC . 'scrnnm/routes/' . pc\route(array(
     null => 'home.php',
     'signup' => 'sign-up.php',
     'login' => 'login.php',
@@ -21,4 +21,4 @@ include '../src/scrnnm/routes/' . pc\route(array(
     'reset-password' => 'reset-password.php'));
 
 $navItems = nav_items($user);
-include '../src/scrnnm/html/template.php';
+include SRC . 'scrnnm/html/template.php';
