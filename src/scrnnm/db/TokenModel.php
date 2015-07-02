@@ -16,27 +16,33 @@ abstract class TokenModel extends DatabaseAdapter {
     }
 
     public function install() {
-        $this->exec('CREATE TABLE ' . $this->tableName . ' (
-            token_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
-            user_id MEDIUMINT UNSIGNED,
-            token VARCHAR(128),
-            data VARCHAR(255),
-            creation_date DATETIME,
-            PRIMARY KEY(token_id))
+        $this->exec('
+            CREATE TABLE ' . $this->tableName . ' (
+                token_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+                user_id MEDIUMINT UNSIGNED,
+                token VARCHAR(128),
+                data VARCHAR(255),
+                creation_date DATETIME,
+                PRIMARY KEY(token_id))
             ENGINE = MYISAM');
     }
 
     public function prune() {
-        $this->exec(sprintf('DELETE FROM %s
-            WHERE creation_date < "%s" - INTERVAL %d DAY',
+        $this->exec(sprintf('
+            DELETE FROM
+                %s
+            WHERE
+                creation_date < "%s" - INTERVAL %d DAY',
             $this->tableName,
             \pc\datetime_now(),
             $this->ttl));
     }
 
     protected function createToken($userID, $token, $data = '') {
-        $this->exec(sprintf('INSERT INTO %s (user_id, token, data, creation_date)
-            VALUES(%d, "%s", "%s", "%s")',
+        $this->exec(sprintf('
+            INSERT INTO
+                %s(user_id, token, data, creation_date)
+                VALUES(%d, "%s", "%s", "%s")',
             $this->tableName,
             $userID,
             $this->esc(\pc\bcrypt_hash($token, BCRYPT_COST)),
@@ -45,10 +51,24 @@ abstract class TokenModel extends DatabaseAdapter {
     }
 
     protected function getToken($userID, $token) {
-        $query = sprintf('SELECT t.token_id, t.token, t.data, u.user_id, u.username
-            FROM %s t JOIN tuser u ON t.user_id = u.user_id
-            WHERE t.user_id = %d AND t.creation_date > "%s" - INTERVAL %d DAY
-            ORDER BY t.creation_date DESC',
+        $query = sprintf('
+            SELECT
+                t.token_id,
+                t.token,
+                t.data,
+                u.user_id,
+                u.username
+            FROM
+                %s t
+            JOIN
+                tuser u
+            ON
+                t.user_id = u.user_id
+            WHERE
+                t.user_id = %d AND
+                t.creation_date > "%s" - INTERVAL %d DAY
+            ORDER BY
+                t.creation_date DESC',
             $this->tableName,
             $userID,
             \pc\datetime_now(),
@@ -62,7 +82,11 @@ abstract class TokenModel extends DatabaseAdapter {
     }
 
     protected function deleteToken($tokenID) {
-        $this->exec(sprintf('DELETE FROM %s WHERE token_id = %d',
+        $this->exec(sprintf('
+            DELETE FROM
+                %s
+            WHERE
+                token_id = %d',
             $this->tableName,
             $tokenID));
     }    

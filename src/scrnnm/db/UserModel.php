@@ -6,12 +6,13 @@ use pjsql\DatabaseAdapter;
 
 class UserModel extends DatabaseAdapter {
     public function install() {
-        $this->exec('CREATE TABLE tuser (
-            user_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
-            username VARCHAR(32) UNIQUE,
-            email VARCHAR(255) DEFAULT "",
-            password VARCHAR(128),
-            PRIMARY KEY(user_id))
+        $this->exec('
+            CREATE TABLE tuser (
+                user_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+                username VARCHAR(32) UNIQUE,
+                email VARCHAR(255) DEFAULT "",
+                password VARCHAR(128),
+                PRIMARY KEY(user_id))
             ENGINE = MYISAM');
     }
 
@@ -23,7 +24,10 @@ class UserModel extends DatabaseAdapter {
             return emailTaken($data['email']);
         }
         else {
-            $this->exec(sprintf('INSERT INTO tuser (username, password) VALUES("%s", "%s")',
+            $this->exec(sprintf('
+                INSERT INTO
+                    tuser(username, password)
+                    VALUES("%s", "%s")',
                 $this->esc($data['username']),
                 $this->esc(\pc\bcrypt_hash($data['password'], BCRYPT_COST))));
 
@@ -80,7 +84,13 @@ class UserModel extends DatabaseAdapter {
             ? sprintf(', password = "%s"', $this->esc(\pc\bcrypt_hash($formData['password'], BCRYPT_COST)))
             : '';
 
-        $this->exec(sprintf('UPDATE tuser SET username = "%s"%s WHERE user_id = %d',
+        $this->exec(sprintf('
+            UPDATE
+                tuser
+            SET
+                username = "%s"%s
+            WHERE
+                user_id = %d',
             $this->esc($formData['username']),
             $setPassword,
             $userID));
@@ -94,13 +104,25 @@ class UserModel extends DatabaseAdapter {
             return emailTaken($email);
         }
 
-        $this->exec(sprintf('UPDATE tuser SET email = "%s" WHERE user_id = %d',
+        $this->exec(sprintf('
+            UPDATE
+                tuser
+            SET
+                email = "%s"
+            WHERE
+                user_id = %d',
             $this->esc($email),
             $userID));
     }
 
     public function updatePassword($userID, $data) {
-        $this->exec(sprintf('UPDATE tuser SET password = "%s" WHERE user_id = %d',
+        $this->exec(sprintf('
+            UPDATE
+                tuser
+            SET
+                password = "%s"
+            WHERE
+                user_id = %d',
             $this->esc(\pc\bcrypt_hash($data['password'], BCRYPT_COST)),
             $userID));
     }
@@ -112,15 +134,27 @@ class UserModel extends DatabaseAdapter {
             return 'Incorrect current password';
         }
 
-        $this->exec(sprintf('DELETE FROM tuser WHERE user_id = %d',
+        $this->exec(sprintf('
+            DELETE FROM
+                tuser
+            WHERE
+                user_id = %d',
             $userID));
 
         unset($_SESSION[SESSION_USER_ID]);
     }
 
     protected function getUser($condition) {
-        $queryData = $this->query(sprintf('SELECT user_id, username, email, password
-            FROM tuser WHERE %s',
+        $queryData = $this->query(sprintf('
+            SELECT
+                user_id,
+                username,
+                email,
+                password
+            FROM
+                tuser
+            WHERE
+                %s',
             $condition));
 
         return $queryData[0];
