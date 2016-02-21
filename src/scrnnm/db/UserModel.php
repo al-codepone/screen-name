@@ -8,11 +8,10 @@ class UserModel extends DatabaseAdapter {
     public function install() {
         $this->exec('
             CREATE TABLE tuser (
-                user_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+                user_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
                 username VARCHAR(32) UNIQUE,
                 email VARCHAR(255) DEFAULT "",
-                password VARCHAR(128),
-                PRIMARY KEY(user_id))
+                password VARCHAR(128))
             ENGINE = MYISAM');
     }
 
@@ -25,9 +24,10 @@ class UserModel extends DatabaseAdapter {
         }
         else {
             $this->exec(sprintf('
-                INSERT INTO
-                    tuser(username, password)
-                    VALUES("%s", "%s")',
+                INSERT INTO tuser
+                    (username, password)
+                VALUES
+                    ("%s", "%s")',
                 $this->esc($data['username']),
                 $this->esc(\pc\bcrypt_hash($data['password'], BCRYPT_COST))));
 
