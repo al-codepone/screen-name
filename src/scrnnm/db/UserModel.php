@@ -55,6 +55,7 @@ class UserModel extends DatabaseAdapter {
             : null;
     }
 
+    //this is called when the user submits the edit account form
     public function updateUser($userID, $formData) {
         $userData = $this->getUserWithUID($userID);
         $usernameUserData = $this->getUserWithUsername($formData['username']);
