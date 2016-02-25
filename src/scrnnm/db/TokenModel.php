@@ -5,7 +5,7 @@ namespace scrnnm\db;
 use pjsql\DatabaseAdapter;
 use pjsql\DatabaseHandle;
 
-abstract class TokenModel extends DatabaseAdapter {
+class TokenModel extends DatabaseAdapter {
     private $tableName;
     private $ttl;
 
@@ -38,7 +38,7 @@ abstract class TokenModel extends DatabaseAdapter {
             $this->ttl));
     }
 
-    protected function createToken($userID, $token, $data = '') {
+    public function createToken($userID, $token, $data = '') {
         $this->exec(sprintf('
             INSERT INTO
                 %s(user_id, token, data, creation_date)
@@ -50,7 +50,7 @@ abstract class TokenModel extends DatabaseAdapter {
             \pc\datetime_now()));
     }
 
-    protected function getToken($userID, $token) {
+    public function getToken($userID, $token) {
         $query = sprintf('
             SELECT
                 t.token_id,
@@ -81,7 +81,7 @@ abstract class TokenModel extends DatabaseAdapter {
         }
     }
 
-    protected function deleteToken($tokenID) {
+    public function deleteToken($tokenID) {
         $this->exec(sprintf('
             DELETE FROM
                 %s

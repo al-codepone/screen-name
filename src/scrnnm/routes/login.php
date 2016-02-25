@@ -9,7 +9,7 @@ else if(list($formData, $errors) = $validator->validate()) {
     if($errors) {
         $content = login($formData, $errors);
     }
-    else if($error = $loginModel->login($formData)) {
+    else if($error = $userModel->login($formData)) {
         $content = login($formData, $error);
     }
     else {

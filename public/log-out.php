@@ -7,7 +7,7 @@ use scrnnm\db\ModelFactory;
 session_name(SESSION_NAME);
 session_start();
 
-$loginModel = ModelFactory::get('scrnnm\db\LoginModel');
-$loginModel->logOut();
+$userModel = ModelFactory::get('scrnnm\db\UserModel');
+$userModel->logOut();
 header('Location:' . ROOT);
 exit();

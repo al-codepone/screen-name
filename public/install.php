@@ -5,7 +5,6 @@ require 'boot.php';
 use scrnnm\db\ModelFactory;
 
 $modelNames = array(
-    'scrnnm\db\LoginModel',
     'scrnnm\db\UserModel',
     'scrnnm\db\VerifyEmailModel',
     'scrnnm\db\ResetPasswordModel');
