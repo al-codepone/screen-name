@@ -12,7 +12,7 @@ if($tokenData) {
         if($errors) {
             $content = reset_password($formData, $errors);
         }
-        else if($error = $userModel->updatePassword($tokenData['user_id'], $formData)) {
+        else if($error = $user_model->updatePassword($tokenData['user_id'], $formData)) {
             $content = reset_password($formData, $error);
         }
         else {

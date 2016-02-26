@@ -9,7 +9,7 @@ else if(list($formData, $errors) = $validator->validate()) {
     if($errors) {
         $content = sign_up($formData, $errors);
     }
-    else if($error = $userModel->createUser($formData)) {
+    else if($error = $user_model->createUser($formData)) {
         $content = sign_up($formData, $error);
     }
     else {

@@ -7,7 +7,7 @@ $data = $verifyEmailModel->getToken($_GET['id'], $_GET['token']);
 
 if($data) {
     $email = $data['data'];
-    $content = ($error = $userModel->updateEmail($data['user_id'], $email))
+    $content = ($error = $user_model->updateEmail($data['user_id'], $email))
         ? $error
         : 'Thank you, your email has been verified.';
 

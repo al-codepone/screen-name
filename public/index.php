@@ -7,8 +7,8 @@ use scrnnm\db\ModelFactory;
 session_name(SESSION_NAME);
 session_start();
 
-$userModel = ModelFactory::get('scrnnm\db\UserModel');
-$user = $userModel->getActiveUser();
+$user_model = ModelFactory::get('scrnnm\db\UserModel');
+$user = $user_model->getActiveUser();
 
 include SRC . 'scrnnm/routes/' . pc\route(array(
     null => 'home.php',

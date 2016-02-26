@@ -10,8 +10,8 @@ class ResetPasswordModel extends TokenModel {
     }
 
     public function createToken($email) {
-        $userModel = ModelFactory::get('scrnnm\db\UserModel');
-        $userData = $userModel->getUserWithEmail($email);
+        $user_model = ModelFactory::get('scrnnm\db\UserModel');
+        $userData = $user_model->getUserWithEmail($email);
 
         if($userData) {
             $token = \pc\sha1_token();
