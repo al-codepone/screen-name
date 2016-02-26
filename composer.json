@@ -8,14 +8,7 @@
     "autoload": {
         "psr-0": {"scrnnm\\": "src/"},
         "files": [
-            "src/scrnnm/email.php",
-            "src/scrnnm/emailStates.php",
-            "src/scrnnm/emailTaken.php",
-            "src/scrnnm/invalidPassword.php",
-            "src/scrnnm/isPassword.php",
-            "src/scrnnm/usernameTaken.php",
-            "src/scrnnm/validatePassword.php",
-            "src/scrnnm/validateUsername.php",
+            "src/scrnnm/misc.php",
             "src/scrnnm/html/html.php"
         ]
     }
