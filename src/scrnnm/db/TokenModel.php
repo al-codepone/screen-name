@@ -6,18 +6,18 @@ use pjsql\DatabaseAdapter;
 use pjsql\DatabaseHandle;
 
 class TokenModel extends DatabaseAdapter {
-    private $tableName;
+    private $table_name;
     private $ttl;
 
-    public function __construct(DatabaseHandle $databaseHandle, $tableName, $ttl) {
-        parent::__construct($databaseHandle);
-        $this->tableName = $tableName;
+    public function __construct(DatabaseHandle $database_handle, $table_name, $ttl) {
+        parent::__construct($database_handle);
+        $this->table_name = $table_name;
         $this->ttl = $ttl;
     }
 
     public function install() {
         $this->exec('
-            CREATE TABLE ' . $this->tableName . ' (
+            CREATE TABLE ' . $this->table_name . ' (
                 token_id
                     MEDIUMINT
                     UNSIGNED
@@ -37,25 +37,25 @@ class TokenModel extends DatabaseAdapter {
                 %s
             WHERE
                 creation_date < "%s" - INTERVAL %d DAY',
-            $this->tableName,
+            $this->table_name,
             \pc\datetime_now(),
             $this->ttl));
     }
 
-    public function createToken($userID, $token, $data = '') {
+    public function createToken($user_id, $token, $data = '') {
         $this->exec(sprintf('
             INSERT INTO %s
                 (user_id, token, data, creation_date)
             VALUES
                 (%d, "%s", "%s", "%s")',
-            $this->tableName,
-            $userID,
+            $this->table_name,
+            $user_id,
             $this->esc(\pc\bcrypt_hash($token, BCRYPT_COST)),
             $this->esc($data),
             \pc\datetime_now()));
     }
 
-    public function getToken($userID, $token) {
+    public function getToken($user_id, $token) {
         $query = sprintf('
             SELECT
                 t.token_id,
@@ -74,8 +74,8 @@ class TokenModel extends DatabaseAdapter {
                 t.creation_date > "%s" - INTERVAL %d DAY
             ORDER BY
                 t.creation_date DESC',
-            $this->tableName,
-            $userID,
+            $this->table_name,
+            $user_id,
             \pc\datetime_now(),
             $this->ttl);
 
@@ -86,13 +86,13 @@ class TokenModel extends DatabaseAdapter {
         }
     }
 
-    public function deleteToken($tokenID) {
+    public function deleteToken($token_id) {
         $this->exec(sprintf('
             DELETE FROM
                 %s
             WHERE
                 token_id = %d',
-            $this->tableName,
-            $tokenID));
+            $this->table_name,
+            $token_id));
     }    
 }
