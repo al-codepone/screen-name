@@ -16,13 +16,7 @@
             "src/scrnnm/usernameTaken.php",
             "src/scrnnm/validatePassword.php",
             "src/scrnnm/validateUsername.php",
-            "src/scrnnm/html/account-updated.php",
-            "src/scrnnm/html/edit-account.php",
-            "src/scrnnm/html/forgot-password.php",
-            "src/scrnnm/html/login.php",
-            "src/scrnnm/html/nav-items.php",
-            "src/scrnnm/html/reset-password.php",
-            "src/scrnnm/html/sign-up.php"
+            "src/scrnnm/html/html.php"
         ]
     }
 }
