@@ -18,12 +18,16 @@ class TokenModel extends DatabaseAdapter {
     public function install() {
         $this->exec('
             CREATE TABLE ' . $this->tableName . ' (
-                token_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+                token_id
+                    MEDIUMINT
+                    UNSIGNED
+                    NOT NULL
+                    AUTO_INCREMENT
+                    PRIMARY KEY,
                 user_id MEDIUMINT UNSIGNED,
                 token VARCHAR(128),
                 data VARCHAR(255),
-                creation_date DATETIME,
-                PRIMARY KEY(token_id))
+                creation_date DATETIME)
             ENGINE = MYISAM');
     }
 
@@ -40,9 +44,10 @@ class TokenModel extends DatabaseAdapter {
 
     public function createToken($userID, $token, $data = '') {
         $this->exec(sprintf('
-            INSERT INTO
-                %s(user_id, token, data, creation_date)
-                VALUES(%d, "%s", "%s", "%s")',
+            INSERT INTO %s
+                (user_id, token, data, creation_date)
+            VALUES
+                (%d, "%s", "%s", "%s")',
             $this->tableName,
             $userID,
             $this->esc(\pc\bcrypt_hash($token, BCRYPT_COST)),
