@@ -4,13 +4,13 @@ require 'boot.php';
 
 use scrnnm\db\ModelFactory;
 
-$modelNames = array(
+$model_names = array(
     'scrnnm\db\UserModel',
     'scrnnm\db\VerifyEmailModel',
     'scrnnm\db\ResetPasswordModel');
 
-foreach($modelNames as $modelName) {
-    $model = ModelFactory::get($modelName);
+foreach($model_names as $model_name) {
+    $model = ModelFactory::get($model_name);
     $model->install();
 }
 
