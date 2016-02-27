@@ -29,4 +29,4 @@ else {
     $t_content = 'Invalid password reset.';
 }
 
-$head = c\title('Reset Password');
+$t_head = c\title('Reset Password');

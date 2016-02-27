@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="<?=CSS?>styles.css"/>
-        <?=$head?>
+        <?=$t_head?>
     </head>
     <body>
         <div id="main">

@@ -32,5 +32,5 @@ else {
     $t_content = edit_account($formData);
 }
 
-$head = c\title('Edit Account') .
+$t_head = c\title('Edit Account') .
     c\js(JS . 'edit-account.js');

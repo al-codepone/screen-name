@@ -23,4 +23,4 @@ else {
     $t_content = forgot_password($validator->values());
 }
 
-$head = c\title('Forgot Password');
+$t_head = c\title('Forgot Password');
