@@ -3,17 +3,17 @@
 $validator = new scrnnm\validator\SignUpValidator();
 
 if($user) {
-    $content = 'You are already signed up.';
+    $t_content = 'You are already signed up.';
 }
 else if(list($formData, $errors) = $validator->validate()) {
     if($errors) {
-        $content = sign_up($formData, $errors);
+        $t_content = sign_up($formData, $errors);
     }
     else if($error = $user_model->createUser($formData)) {
-        $content = sign_up($formData, $error);
+        $t_content = sign_up($formData, $error);
     }
     else {
-        $content = sprintf('Thank you for signing up.
+        $t_content = sprintf('Thank you for signing up.
             You can now <a href="%s">log in</a>. %s',
             LOGIN, $formData['email']
                 ? 'We emailed you a link to verify your email.'
@@ -22,7 +22,7 @@ else if(list($formData, $errors) = $validator->validate()) {
 }
 else {
     $autofocus = c\focus('username');
-    $content = sign_up($validator->values());
+    $t_content = sign_up($validator->values());
 }
 
 $head = c\title('Sign Up');
