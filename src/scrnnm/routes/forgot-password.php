@@ -19,7 +19,7 @@ if(list($formData, $errors) = $validator->validate()) {
     }
 }
 else {
-    $autofocus = c\focus('email');
+    $t_last = c\focus('email');
     $t_content = forgot_password($validator->values());
 }
 

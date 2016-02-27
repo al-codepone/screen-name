@@ -21,7 +21,7 @@ if($tokenData) {
         }
     }
     else {
-        $autofocus = c\focus('password');
+        $t_last = c\focus('password');
         $t_content = reset_password($validator->values());
     }
 }

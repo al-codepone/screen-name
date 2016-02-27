@@ -10,6 +10,6 @@
             <ul id="nav"><?=$t_nav_items?></ul>
             <div id="content"><?=$t_content?></div>
         </div>
-        <?=$autofocus?>
+        <?=$t_last?>
     </body>
 </html>
