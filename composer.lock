@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "02b683057e80ba497e88b248f66e6222",
-    "content-hash": "e2c101fc48534636518d0fbf52ceeae7",
+    "hash": "d08f1958c7f66cabb83f0810f44b0965",
+    "content-hash": "5d75a1ceb0052286e70dec210b0fc80b",
     "packages": [
         {
             "name": "bouncers-book/bouncers-book",
@@ -142,16 +142,16 @@
         },
         {
             "name": "paper-cello/paper-cello",
-            "version": "0.5.0",
+            "version": "0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/al-codepone/paper-cello.git",
-                "reference": "4daa2d244cfa055493ecef64522de4aa5f037832"
+                "reference": "eaa3302d42d27f8218091ff9dc7f2994032e884c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/al-codepone/paper-cello/zipball/4daa2d244cfa055493ecef64522de4aa5f037832",
-                "reference": "4daa2d244cfa055493ecef64522de4aa5f037832",
+                "url": "https://api.github.com/repos/al-codepone/paper-cello/zipball/eaa3302d42d27f8218091ff9dc7f2994032e884c",
+                "reference": "eaa3302d42d27f8218091ff9dc7f2994032e884c",
                 "shasum": ""
             },
             "require": {
@@ -187,7 +187,7 @@
                 "sha1",
                 "token"
             ],
-            "time": "2014-08-02 23:28:57"
+            "time": "2016-02-28 20:29:54"
         }
     ],
     "packages-dev": [],

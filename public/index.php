@@ -13,11 +13,11 @@ $user = $user_model->getActiveUser();
 include SRC . 'scrnnm/routes/' . pc\route(array(
     null => 'home.php',
     'signup' => 'sign-up.php',
-    'login' => 'login.php',
-    'edit-account' => 'edit-account.php',
-    'verify-email' => 'verify-email.php',
-    'forgot-password' => 'forgot-password.php',
-    'reset-password' => 'reset-password.php'));
+    'login.php',
+    'edit-account.php',
+    'verify-email.php',
+    'forgot-password.php',
+    'reset-password.php'));
 
 $t_nav_items = nav_items($user);
 include SRC . 'scrnnm/html/template.php';
