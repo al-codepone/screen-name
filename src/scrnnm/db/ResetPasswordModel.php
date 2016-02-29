@@ -25,8 +25,8 @@ class ResetPasswordModel extends TokenModel {
         }
     }
 
-    public function getToken($userID, $token) {
-        return parent::getToken($userID, $token);
+    public function getToken($user_id, $token) {
+        return parent::getToken($user_id, $token);
     }
 
     public function deleteToken($tokenID) {

@@ -48,18 +48,18 @@ class UserModel extends DatabaseAdapter {
                 $this->esc($data['username']),
                 $this->esc(\pc\bcrypt_hash($data['password'], BCRYPT_COST))));
 
-            $userID = $this->conn()->insert_id;
+            $user_id = $this->conn()->insert_id;
 
             if($data['email']) {
                 $verifyEmailModel = ModelFactory::get('scrnnm\db\VerifyEmailModel');
-                $verifyEmailModel->createToken($userID, $data['username'], $data['email']);
+                $verifyEmailModel->createToken($user_id, $data['username'], $data['email']);
             }
         }
     }
 
     //
-    public function getUserWithUID($userID) {
-        return $this->getUser(sprintf('user_id = %d', $userID));
+    public function getUserWithUID($user_id) {
+        return $this->getUser(sprintf('user_id = %d', $user_id));
     }
 
     //
@@ -91,8 +91,8 @@ class UserModel extends DatabaseAdapter {
     }
 
     //this is called when the user submits the edit account form
-    public function updateUser($userID, $form_data) {
-        $userData = $this->getUserWithUID($userID);
+    public function updateUser($user_id, $form_data) {
+        $userData = $this->getUserWithUID($user_id);
         $usernameUserData = $this->getUserWithUsername($form_data['username']);
         $emailUserData = $this->getUserWithEmail($form_data['email']);
         $emailStates = emailStates($userData, $form_data);
@@ -100,20 +100,20 @@ class UserModel extends DatabaseAdapter {
         if($userData['password'] != \pc\bcrypt_hash($form_data['current_password'], $userData['password'])) {
             return 'Incorrect current password';
         }
-        else if($usernameUserData && $userID != $usernameUserData['user_id']) {
+        else if($usernameUserData && $user_id != $usernameUserData['user_id']) {
             return usernameTaken($form_data['username']);
         }
-        else if($emailUserData && $userID != $emailUserData['user_id']) {
+        else if($emailUserData && $user_id != $emailUserData['user_id']) {
             return emailTaken($form_data['email']);
         }
 
         if($emailStates['is_new'] || $emailStates['is_changed']) {
             $verifyEmailModel = ModelFactory::get('scrnnm\db\VerifyEmailModel');
-            $verifyEmailModel->createToken($userID, $form_data['username'], $form_data['email']);
+            $verifyEmailModel->createToken($user_id, $form_data['username'], $form_data['email']);
         }
 
         if($emailStates['is_deleted'] || $emailStates['is_changed']) {
-            $this->updateEmail($userID, '');
+            $this->updateEmail($user_id, '');
         }
 
         $setPassword = $form_data['password']
@@ -129,14 +129,14 @@ class UserModel extends DatabaseAdapter {
                 user_id = %d',
             $this->esc($form_data['username']),
             $setPassword,
-            $userID));
+            $user_id));
 
         $_SESSION[SESSION_USERNAME] = $form_data['username'];
         return $userData;
     }
 
     //
-    public function updateEmail($userID, $email) {
+    public function updateEmail($user_id, $email) {
         if($this->getUserWithEmail($email)) {
             return emailTaken($email);
         }
@@ -149,11 +149,11 @@ class UserModel extends DatabaseAdapter {
             WHERE
                 user_id = %d',
             $this->esc($email),
-            $userID));
+            $user_id));
     }
 
     //
-    public function updatePassword($userID, $data) {
+    public function updatePassword($user_id, $data) {
         $this->exec(sprintf('
             UPDATE
                 tuser
@@ -162,12 +162,12 @@ class UserModel extends DatabaseAdapter {
             WHERE
                 user_id = %d',
             $this->esc(\pc\bcrypt_hash($data['password'], BCRYPT_COST)),
-            $userID));
+            $user_id));
     }
 
     //
-    public function deleteUser($userID, $form_data) {
-        $userData = $this->getUserWithUID($userID);
+    public function deleteUser($user_id, $form_data) {
+        $userData = $this->getUserWithUID($user_id);
 
         if($userData['password'] != \pc\bcrypt_hash($form_data['current_password'], $userData['password'])) {
             return 'Incorrect current password';
@@ -178,7 +178,7 @@ class UserModel extends DatabaseAdapter {
                 tuser
             WHERE
                 user_id = %d',
-            $userID));
+            $user_id));
 
         unset($_SESSION[SESSION_USER_ID]);
     }
@@ -215,18 +215,18 @@ class UserModel extends DatabaseAdapter {
     }
 
     //
-    protected function createPersistentLogin($userID) {
+    protected function createPersistentLogin($user_id) {
         $token = \pc\sha1_token();
-        $this->login_token->createToken($userID, $token);
-        setcookie(COOKIE_PERSISTENT_LOGIN, "$userID.$token",
+        $this->login_token->createToken($user_id, $token);
+        setcookie(COOKIE_PERSISTENT_LOGIN, "$user_id.$token",
             time() + 60*60*24*TTL_PERSISTENT_LOGIN);
     }
 
     //
     protected function getPersistentLogin() {
         if($_COOKIE[COOKIE_PERSISTENT_LOGIN]) {
-            list($userID, $token) = explode('.', $_COOKIE[COOKIE_PERSISTENT_LOGIN]);
-            return $this->login_token->getToken($userID, $token);
+            list($user_id, $token) = explode('.', $_COOKIE[COOKIE_PERSISTENT_LOGIN]);
+            return $this->login_token->getToken($user_id, $token);
         }
     }
 
