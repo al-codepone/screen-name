@@ -94,7 +94,7 @@ class UserModel extends DatabaseAdapter {
     public function updateUser($user_id, $form_data) {
         $user_data = $this->getUserWithUID($user_id);
         $username_user_data = $this->getUserWithUsername($form_data['username']);
-        $emailUserData = $this->getUserWithEmail($form_data['email']);
+        $email_user_data = $this->getUserWithEmail($form_data['email']);
         $emailStates = emailStates($user_data, $form_data);
 
         if($user_data['password'] != \pc\bcrypt_hash($form_data['current_password'], $user_data['password'])) {
@@ -103,7 +103,7 @@ class UserModel extends DatabaseAdapter {
         else if($username_user_data && $user_id != $username_user_data['user_id']) {
             return usernameTaken($form_data['username']);
         }
-        else if($emailUserData && $user_id != $emailUserData['user_id']) {
+        else if($email_user_data && $user_id != $email_user_data['user_id']) {
             return emailTaken($form_data['email']);
         }
 
