@@ -95,7 +95,7 @@ class UserModel extends DatabaseAdapter {
         $user_data = $this->getUserWithUID($user_id);
         $username_user_data = $this->getUserWithUsername($form_data['username']);
         $email_user_data = $this->getUserWithEmail($form_data['email']);
-        $emailStates = emailStates($user_data, $form_data);
+        $email_states = emailStates($user_data, $form_data);
 
         if($user_data['password'] != \pc\bcrypt_hash($form_data['current_password'], $user_data['password'])) {
             return 'Incorrect current password';
@@ -107,12 +107,12 @@ class UserModel extends DatabaseAdapter {
             return emailTaken($form_data['email']);
         }
 
-        if($emailStates['is_new'] || $emailStates['is_changed']) {
+        if($email_states['is_new'] || $email_states['is_changed']) {
             $verifyEmailModel = ModelFactory::get('scrnnm\db\VerifyEmailModel');
             $verifyEmailModel->createToken($user_id, $form_data['username'], $form_data['email']);
         }
 
-        if($emailStates['is_deleted'] || $emailStates['is_changed']) {
+        if($email_states['is_deleted'] || $email_states['is_changed']) {
             $this->updateEmail($user_id, '');
         }
 
