@@ -93,14 +93,14 @@ class UserModel extends DatabaseAdapter {
     //this is called when the user submits the edit account form
     public function updateUser($user_id, $form_data) {
         $user_data = $this->getUserWithUID($user_id);
-        $usernameUserData = $this->getUserWithUsername($form_data['username']);
+        $username_user_data = $this->getUserWithUsername($form_data['username']);
         $emailUserData = $this->getUserWithEmail($form_data['email']);
         $emailStates = emailStates($user_data, $form_data);
 
         if($user_data['password'] != \pc\bcrypt_hash($form_data['current_password'], $user_data['password'])) {
             return 'Incorrect current password';
         }
-        else if($usernameUserData && $user_id != $usernameUserData['user_id']) {
+        else if($username_user_data && $user_id != $username_user_data['user_id']) {
             return usernameTaken($form_data['username']);
         }
         else if($emailUserData && $user_id != $emailUserData['user_id']) {
