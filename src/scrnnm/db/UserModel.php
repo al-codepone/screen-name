@@ -51,8 +51,8 @@ class UserModel extends DatabaseAdapter {
             $user_id = $this->conn()->insert_id;
 
             if($data['email']) {
-                $verifyEmailModel = ModelFactory::get('scrnnm\db\VerifyEmailModel');
-                $verifyEmailModel->createToken($user_id, $data['username'], $data['email']);
+                $verify_model = ModelFactory::get('scrnnm\db\VerifyEmailModel');
+                $verify_model->createToken($user_id, $data['username'], $data['email']);
             }
         }
     }
@@ -108,8 +108,8 @@ class UserModel extends DatabaseAdapter {
         }
 
         if($email_states['is_new'] || $email_states['is_changed']) {
-            $verifyEmailModel = ModelFactory::get('scrnnm\db\VerifyEmailModel');
-            $verifyEmailModel->createToken($user_id, $form_data['username'], $form_data['email']);
+            $verify_model = ModelFactory::get('scrnnm\db\VerifyEmailModel');
+            $verify_model->createToken($user_id, $form_data['username'], $form_data['email']);
         }
 
         if($email_states['is_deleted'] || $email_states['is_changed']) {
