@@ -92,12 +92,12 @@ class UserModel extends DatabaseAdapter {
 
     //this is called when the user submits the edit account form
     public function updateUser($user_id, $form_data) {
-        $userData = $this->getUserWithUID($user_id);
+        $user_data = $this->getUserWithUID($user_id);
         $usernameUserData = $this->getUserWithUsername($form_data['username']);
         $emailUserData = $this->getUserWithEmail($form_data['email']);
-        $emailStates = emailStates($userData, $form_data);
+        $emailStates = emailStates($user_data, $form_data);
 
-        if($userData['password'] != \pc\bcrypt_hash($form_data['current_password'], $userData['password'])) {
+        if($user_data['password'] != \pc\bcrypt_hash($form_data['current_password'], $user_data['password'])) {
             return 'Incorrect current password';
         }
         else if($usernameUserData && $user_id != $usernameUserData['user_id']) {
@@ -132,7 +132,7 @@ class UserModel extends DatabaseAdapter {
             $user_id));
 
         $_SESSION[SESSION_USERNAME] = $form_data['username'];
-        return $userData;
+        return $user_data;
     }
 
     //
@@ -167,9 +167,9 @@ class UserModel extends DatabaseAdapter {
 
     //
     public function deleteUser($user_id, $form_data) {
-        $userData = $this->getUserWithUID($user_id);
+        $user_data = $this->getUserWithUID($user_id);
 
-        if($userData['password'] != \pc\bcrypt_hash($form_data['current_password'], $userData['password'])) {
+        if($user_data['password'] != \pc\bcrypt_hash($form_data['current_password'], $user_data['password'])) {
             return 'Incorrect current password';
         }
 

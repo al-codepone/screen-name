@@ -11,16 +11,16 @@ class ResetPasswordModel extends TokenModel {
 
     public function createToken($email) {
         $user_model = ModelFactory::get('scrnnm\db\UserModel');
-        $userData = $user_model->getUserWithEmail($email);
+        $user_data = $user_model->getUserWithEmail($email);
 
-        if($userData) {
+        if($user_data) {
             $token = \pc\sha1_token();
             $subject = 'Reset Your Password';
             $additionalHeaders = sprintf("From: %s\r\n", EMAIL_FROM);
             $message = sprintf("%s,\n\nUse this link to reset your password:\n\n%s%s%d/%s",
-                $userData['username'], SITE, RESET_PASSWORD, $userData['user_id'], $token);
+                $user_data['username'], SITE, RESET_PASSWORD, $user_data['user_id'], $token);
 
-            parent::createToken($userData['user_id'], $token);
+            parent::createToken($user_data['user_id'], $token);
             email($email, $subject, $message, $additionalHeaders);
         }
     }

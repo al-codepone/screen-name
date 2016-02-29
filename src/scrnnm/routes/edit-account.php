@@ -25,10 +25,10 @@ else if(list($form_data, $errors) = $validator->validate()) {
     }
 }
 else {
-    $userData = $user_model->getUserWithUID($user['user_id']);
+    $user_data = $user_model->getUserWithUID($user['user_id']);
     $form_data = $validator->values();
-    $form_data['username'] = $userData['username'];
-    $form_data['email'] = $userData['email'];
+    $form_data['username'] = $user_data['username'];
+    $form_data['email'] = $user_data['email'];
     $t_content = edit_account($form_data);
 }
 

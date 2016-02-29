@@ -17,12 +17,12 @@ message: $message\n\n\n\n";
 }
 
 //
-function emailStates($userData, $form_data) {
+function emailStates($user_data, $form_data) {
     return array(
-        'is_new' => !$userData['email'] && $form_data['email'],
-        'is_deleted' => $userData['email'] && !$form_data['email'],
-        'is_changed' => $userData['email'] && $form_data['email']
-            && $userData['email'] != $form_data['email']);
+        'is_new' => !$user_data['email'] && $form_data['email'],
+        'is_deleted' => $user_data['email'] && !$form_data['email'],
+        'is_changed' => $user_data['email'] && $form_data['email']
+            && $user_data['email'] != $form_data['email']);
 }
 
 //
