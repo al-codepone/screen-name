@@ -91,33 +91,33 @@ class UserModel extends DatabaseAdapter {
     }
 
     //this is called when the user submits the edit account form
-    public function updateUser($userID, $formData) {
+    public function updateUser($userID, $form_data) {
         $userData = $this->getUserWithUID($userID);
-        $usernameUserData = $this->getUserWithUsername($formData['username']);
-        $emailUserData = $this->getUserWithEmail($formData['email']);
-        $emailStates = emailStates($userData, $formData);
+        $usernameUserData = $this->getUserWithUsername($form_data['username']);
+        $emailUserData = $this->getUserWithEmail($form_data['email']);
+        $emailStates = emailStates($userData, $form_data);
 
-        if($userData['password'] != \pc\bcrypt_hash($formData['current_password'], $userData['password'])) {
+        if($userData['password'] != \pc\bcrypt_hash($form_data['current_password'], $userData['password'])) {
             return 'Incorrect current password';
         }
         else if($usernameUserData && $userID != $usernameUserData['user_id']) {
-            return usernameTaken($formData['username']);
+            return usernameTaken($form_data['username']);
         }
         else if($emailUserData && $userID != $emailUserData['user_id']) {
-            return emailTaken($formData['email']);
+            return emailTaken($form_data['email']);
         }
 
         if($emailStates['is_new'] || $emailStates['is_changed']) {
             $verifyEmailModel = ModelFactory::get('scrnnm\db\VerifyEmailModel');
-            $verifyEmailModel->createToken($userID, $formData['username'], $formData['email']);
+            $verifyEmailModel->createToken($userID, $form_data['username'], $form_data['email']);
         }
 
         if($emailStates['is_deleted'] || $emailStates['is_changed']) {
             $this->updateEmail($userID, '');
         }
 
-        $setPassword = $formData['password']
-            ? sprintf(', password = "%s"', $this->esc(\pc\bcrypt_hash($formData['password'], BCRYPT_COST)))
+        $setPassword = $form_data['password']
+            ? sprintf(', password = "%s"', $this->esc(\pc\bcrypt_hash($form_data['password'], BCRYPT_COST)))
             : '';
 
         $this->exec(sprintf('
@@ -127,11 +127,11 @@ class UserModel extends DatabaseAdapter {
                 username = "%s"%s
             WHERE
                 user_id = %d',
-            $this->esc($formData['username']),
+            $this->esc($form_data['username']),
             $setPassword,
             $userID));
 
-        $_SESSION[SESSION_USERNAME] = $formData['username'];
+        $_SESSION[SESSION_USERNAME] = $form_data['username'];
         return $userData;
     }
 
@@ -166,10 +166,10 @@ class UserModel extends DatabaseAdapter {
     }
 
     //
-    public function deleteUser($userID, $formData) {
+    public function deleteUser($userID, $form_data) {
         $userData = $this->getUserWithUID($userID);
 
-        if($userData['password'] != \pc\bcrypt_hash($formData['current_password'], $userData['password'])) {
+        if($userData['password'] != \pc\bcrypt_hash($form_data['current_password'], $userData['password'])) {
             return 'Incorrect current password';
         }
 

@@ -5,12 +5,12 @@ $validator = new scrnnm\validator\LoginValidator();
 if($user) {
     $t_content = 'You are already logged in.';
 }
-else if(list($formData, $errors) = $validator->validate()) {
+else if(list($form_data, $errors) = $validator->validate()) {
     if($errors) {
-        $t_content = login($formData, $errors);
+        $t_content = login($form_data, $errors);
     }
-    else if($error = $user_model->login($formData)) {
-        $t_content = login($formData, $error);
+    else if($error = $user_model->login($form_data)) {
+        $t_content = login($form_data, $error);
     }
     else {
         header('Location:' . ROOT);

@@ -4,18 +4,18 @@ use scrnnm\db\ModelFactory;
 
 $validator = new scrnnm\validator\ForgotPasswordValidator();
 
-if(list($formData, $errors) = $validator->validate()) {
+if(list($form_data, $errors) = $validator->validate()) {
     if($errors) {
-        $t_content = forgot_password($formData, $errors);
+        $t_content = forgot_password($form_data, $errors);
     }
     else {
         $resetPasswordModel = ModelFactory::get('scrnnm\db\ResetPasswordModel');
-        $resetPasswordModel->createToken($formData['email']);
+        $resetPasswordModel->createToken($form_data['email']);
         $t_content = sprintf("If the email address you entered, %s,
             is associated with a user account, then you will receive
             an email with directions for resetting your password. If
             you don't receive this email then please check your junk mail folder.",
-            $formData['email']);
+            $form_data['email']);
     }
 }
 else {

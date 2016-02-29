@@ -8,12 +8,12 @@ $tokenData = $resetPasswordModel->getToken($_GET['id'], $_GET['token']);
 if($tokenData) {
     $validator = new scrnnm\validator\ResetPasswordValidator();
 
-    if(list($formData, $errors) = $validator->validate()) {
+    if(list($form_data, $errors) = $validator->validate()) {
         if($errors) {
-            $t_content = reset_password($formData, $errors);
+            $t_content = reset_password($form_data, $errors);
         }
-        else if($error = $user_model->updatePassword($tokenData['user_id'], $formData)) {
-            $t_content = reset_password($formData, $error);
+        else if($error = $user_model->updatePassword($tokenData['user_id'], $form_data)) {
+            $t_content = reset_password($form_data, $error);
         }
         else {
             $resetPasswordModel->deleteToken($tokenData['token_id']);
