@@ -48,9 +48,8 @@ class UserModel extends DatabaseAdapter {
                 $this->esc($data['username']),
                 $this->esc(\pc\bcrypt_hash($data['password'], BCRYPT_COST))));
 
-            $user_id = $this->conn()->insert_id;
-
             if($data['email']) {
+                $user_id = $this->conn()->insert_id;
                 $verify_model = ModelFactory::get('scrnnm\db\VerifyEmailModel');
                 $verify_model->createToken($user_id, $data['username'], $data['email']);
             }
