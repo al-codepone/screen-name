@@ -1,15 +1,15 @@
 <?php
 
 //
-function email($to, $subject, $message, $additionalHeaders) {
+function email($to, $subject, $message, $additional_headers) {
     if(EMAIL_IS_SEND) {
-        mail($to, $subject, $message, $additionalHeaders);
+        mail($to, $subject, $message, $additional_headers);
     }
 
     if(EMAIL_IS_LOG) {
         $data = "to: $to
 subject: $subject
-additional headers: $additionalHeaders
+additional headers: $additional_headers
 message: $message\n\n\n\n";
 
         file_put_contents(EMAIL_LOG_FILE, $data, FILE_APPEND);
@@ -31,8 +31,8 @@ function email_taken($email) {
 }
 
 //
-function invalid_password($inputName) {
-    return "$inputName must be at least 8 characters";
+function invalid_password($input_name) {
+    return "$input_name must be at least 8 characters";
 }
 
 //
@@ -46,9 +46,9 @@ function username_taken($username) {
 }
 
 //
-function validate_password($value, $inputName) {
+function validate_password($value, $input_name) {
     if(!is_password($value)) {
-        return invalid_password($inputName);
+        return invalid_password($input_name);
     }
 }
 
