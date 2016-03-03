@@ -10,7 +10,7 @@ session_start();
 $user_model = ModelFactory::get('scrnnm\db\UserModel');
 $user = $user_model->getActiveUser();
 
-include SRC . 'scrnnm/routes/' . pc\route(array(
+include SRC . 'scrnnm/route/' . pc\route(array(
     null => 'home.php',
     'signup' => 'sign-up.php',
     'login.php',
