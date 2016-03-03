@@ -10,11 +10,11 @@ class ResetPasswordValidator extends \bbook\FormValidator {
     }
 
     protected function validate_password($value) {
-        return validatePassword($value, 'New password');
+        return validate_password($value, 'New password');
     }
 
     protected function validate_confirm_password($value) {
-        return validatePassword($value, 'Confirm new password');
+        return validate_password($value, 'Confirm new password');
     }
 
     protected function more($values) {

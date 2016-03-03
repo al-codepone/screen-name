@@ -34,10 +34,10 @@ class UserModel extends DatabaseAdapter {
     //
     public function createUser($data) {
         if($this->getUserWithUsername($data['username'])) {
-            return usernameTaken($data['username']);
+            return username_taken($data['username']);
         }
         else if($this->getUserWithEmail($data['email'])) {
-            return emailTaken($data['email']);
+            return email_taken($data['email']);
         }
         else {
             $this->exec(sprintf('
@@ -94,16 +94,16 @@ class UserModel extends DatabaseAdapter {
         $user_data = $this->getUserWithUID($user_id);
         $username_user_data = $this->getUserWithUsername($form_data['username']);
         $email_user_data = $this->getUserWithEmail($form_data['email']);
-        $email_states = emailStates($user_data, $form_data);
+        $email_states = email_states($user_data, $form_data);
 
         if($user_data['password'] != \pc\bcrypt_hash($form_data['current_password'], $user_data['password'])) {
             return 'Incorrect current password';
         }
         else if($username_user_data && $user_id != $username_user_data['user_id']) {
-            return usernameTaken($form_data['username']);
+            return username_taken($form_data['username']);
         }
         else if($email_user_data && $user_id != $email_user_data['user_id']) {
-            return emailTaken($form_data['email']);
+            return email_taken($form_data['email']);
         }
 
         if($email_states['is_new'] || $email_states['is_changed']) {
@@ -137,7 +137,7 @@ class UserModel extends DatabaseAdapter {
     //
     public function updateEmail($user_id, $email) {
         if($this->getUserWithEmail($email)) {
-            return emailTaken($email);
+            return email_taken($email);
         }
 
         $this->exec(sprintf('

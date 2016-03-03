@@ -12,7 +12,7 @@ class SignUpValidator extends \bbook\FormValidator {
     }
 
     protected function validate_username($value) {
-        return validateUsername($value);
+        return validate_username($value);
     }
 
     protected function validate_email($value) {
@@ -22,11 +22,11 @@ class SignUpValidator extends \bbook\FormValidator {
     }
 
     protected function validate_password($value) {
-        return validatePassword($value, 'Password');
+        return validate_password($value, 'Password');
     }
 
     protected function validate_confirm_password($value) {
-        return validatePassword($value, 'Confirm password');
+        return validate_password($value, 'Confirm password');
     }
 
     protected function more($values) {

@@ -2,7 +2,7 @@
 
 //
 function account_updated($user_data, $form_data) {
-    $state = emailStates($user_data, $form_data);
+    $state = email_states($user_data, $form_data);
     $sentence = '';
 
     if($state['is_changed']) {

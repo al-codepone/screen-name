@@ -14,7 +14,7 @@ class EditAccountValidator extends \bbook\FormValidator {
     }
 
     protected function validate_username($value) {
-        return validateUsername($value);
+        return validate_username($value);
     }
 
     protected function validate_email($value) {
@@ -24,14 +24,14 @@ class EditAccountValidator extends \bbook\FormValidator {
     }
 
     protected function validate_password($value) {
-        if($value != '' && !isPassword($value)) {
-            return invalidPassword('New password');
+        if($value != '' && !is_password($value)) {
+            return invalid_password('New password');
         }
     }
 
     protected function validate_confirm_password($value) {
-        if($value != '' && !isPassword($value)) {
-            return invalidPassword('Confirm new password');
+        if($value != '' && !is_password($value)) {
+            return invalid_password('Confirm new password');
         }
     }
 

@@ -17,7 +17,7 @@ message: $message\n\n\n\n";
 }
 
 //
-function emailStates($user_data, $form_data) {
+function email_states($user_data, $form_data) {
     return array(
         'is_new' => !$user_data['email'] && $form_data['email'],
         'is_deleted' => $user_data['email'] && !$form_data['email'],
@@ -26,34 +26,34 @@ function emailStates($user_data, $form_data) {
 }
 
 //
-function emailTaken($email) {
+function email_taken($email) {
     return "Email \"$email\" already in use";
 }
 
 //
-function invalidPassword($inputName) {
+function invalid_password($inputName) {
     return "$inputName must be at least 8 characters";
 }
 
 //
-function isPassword($value) {
+function is_password($value) {
     return preg_match('/^.{8,100}$/', $value);
 }
 
 //
-function usernameTaken($username) {
+function username_taken($username) {
     return "Username \"$username\" already in use";
 }
 
 //
-function validatePassword($value, $inputName) {
-    if(!isPassword($value)) {
-        return invalidPassword($inputName);
+function validate_password($value, $inputName) {
+    if(!is_password($value)) {
+        return invalid_password($inputName);
     }
 }
 
 //
-function validateUsername($value) {
+function validate_username($value) {
     if(!preg_match('/^[a-z0-9-]{4,16}$/i', $value)) {
         return 'Username must be 4-16 characters and use letters, numbers and dashes only';
     }
