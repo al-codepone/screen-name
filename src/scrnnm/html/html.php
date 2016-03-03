@@ -90,6 +90,17 @@ function forgot_password(array $form_data, $errors = array()) {
 
 //
 function login(array $form_data, $errors = array()) {
+    $remember_me = IS_REMEMBER_ME
+        ? c\dlinput(
+            'Remember Me',
+            array(
+                'id' => 'remember_me',
+                'value' => 1,
+                'type' => 'checkbox',
+                $form_data['remember_me'] ? 'checked' : ''))
+
+        : '';
+
     return c\form(
         array('method' => 'post'),
         c\ulist($errors, array('class' => 'error')),
@@ -105,14 +116,7 @@ function login(array $form_data, $errors = array()) {
                 'id' => 'password',
                 'type' => 'password')),
 
-        c\dlinput(
-            'Remember Me',
-            array(
-                'id' => 'remember_me',
-                'value' => 1,
-                'type' => 'checkbox',
-                $form_data['remember_me'] ? 'checked' : '')),
-
+        $remember_me,
         c\div(c\hlink(FORGOT_PASSWORD, 'forgot password')),
         c\div('<input type="submit" value="Log In"/>'));
 }

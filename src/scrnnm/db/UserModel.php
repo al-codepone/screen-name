@@ -79,7 +79,7 @@ class UserModel extends DatabaseAdapter {
         if(isset($_SESSION[SESSION_USER_ID])) {
             return $this->getSessionUser();
         }
-        else if($data = $this->getPersistentLogin()) {
+        else if(IS_REMEMBER_ME && $data = $this->getPersistentLogin()) {
             $this->login_token->deleteToken($data['token_id']);
             $this->createPersistentLogin($data['user_id']);
 
@@ -195,7 +195,7 @@ class UserModel extends DatabaseAdapter {
             return 'Incorrect username and password';
         }
 
-        if($form_data['remember_me']) {
+        if(IS_REMEMBER_ME && $form_data['remember_me']) {
             $this->createPersistentLogin($user_data['user_id']);
         }
 

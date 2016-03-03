@@ -38,3 +38,4 @@ define('TTL_VERIFY_EMAIL', 30);
 define('TTL_RESET_PASSWORD', 1);
 
 define('BCRYPT_COST', 10);
+define('IS_REMEMBER_ME', true);
