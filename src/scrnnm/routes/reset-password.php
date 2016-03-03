@@ -2,21 +2,21 @@
 
 use scrnnm\db\ModelFactory;
 
-$resetPasswordModel = ModelFactory::get('scrnnm\db\ResetPasswordModel');
-$tokenData = $resetPasswordModel->getToken($_GET['id'], $_GET['token']);
+$reset_model = ModelFactory::get('scrnnm\db\ResetPasswordModel');
+$token_data = $reset_model->getToken($_GET['id'], $_GET['token']);
 
-if($tokenData) {
+if($token_data) {
     $validator = new scrnnm\validator\ResetPasswordValidator();
 
     if(list($form_data, $errors) = $validator->validate()) {
         if($errors) {
             $t_content = reset_password($form_data, $errors);
         }
-        else if($error = $user_model->updatePassword($tokenData['user_id'], $form_data)) {
+        else if($error = $user_model->updatePassword($token_data['user_id'], $form_data)) {
             $t_content = reset_password($form_data, $error);
         }
         else {
-            $resetPasswordModel->deleteToken($tokenData['token_id']);
+            $reset_model->deleteToken($token_data['token_id']);
             $t_content = 'Your password was successfully reset.';
         }
     }
