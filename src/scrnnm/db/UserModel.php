@@ -238,7 +238,7 @@ class UserModel extends DatabaseAdapter {
 
     //
     protected function getUser($condition) {
-        $queryData = $this->query(sprintf('
+        $data = $this->query(sprintf('
             SELECT
                 user_id,
                 username,
@@ -250,6 +250,6 @@ class UserModel extends DatabaseAdapter {
                 %s',
             $condition));
 
-        return $queryData[0];
+        return $data[0];
     }
 }
