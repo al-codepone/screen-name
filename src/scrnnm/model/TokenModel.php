@@ -1,6 +1,6 @@
 <?php
 
-namespace scrnnm\db;
+namespace scrnnm\model;
 
 use pjsql\DatabaseAdapter;
 use pjsql\DatabaseHandle;

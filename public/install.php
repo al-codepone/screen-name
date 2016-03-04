@@ -2,12 +2,12 @@
 
 require 'boot.php';
 
-use scrnnm\db\ModelFactory;
+use scrnnm\model\ModelFactory;
 
 $model_names = array(
-    'scrnnm\db\UserModel',
-    'scrnnm\db\VerifyEmailModel',
-    'scrnnm\db\ResetPasswordModel');
+    'scrnnm\model\UserModel',
+    'scrnnm\model\VerifyEmailModel',
+    'scrnnm\model\ResetPasswordModel');
 
 foreach($model_names as $model_name) {
     $model = ModelFactory::get($model_name);

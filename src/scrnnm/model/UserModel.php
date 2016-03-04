@@ -1,6 +1,6 @@
 <?php
 
-namespace scrnnm\db;
+namespace scrnnm\model;
 
 use pjsql\DatabaseAdapter;
 use pjsql\DatabaseHandle;
@@ -50,7 +50,7 @@ class UserModel extends DatabaseAdapter {
 
             if($data['email']) {
                 $user_id = $this->conn()->insert_id;
-                $verify_model = ModelFactory::get('scrnnm\db\VerifyEmailModel');
+                $verify_model = ModelFactory::get('scrnnm\model\VerifyEmailModel');
                 $verify_model->createToken($user_id, $data['username'], $data['email']);
             }
         }
@@ -107,7 +107,7 @@ class UserModel extends DatabaseAdapter {
         }
 
         if($email_states['is_new'] || $email_states['is_changed']) {
-            $verify_model = ModelFactory::get('scrnnm\db\VerifyEmailModel');
+            $verify_model = ModelFactory::get('scrnnm\model\VerifyEmailModel');
             $verify_model->createToken($user_id, $form_data['username'], $form_data['email']);
         }
 

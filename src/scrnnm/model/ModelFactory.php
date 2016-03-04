@@ -1,6 +1,6 @@
 <?php
 
-namespace scrnnm\db;
+namespace scrnnm\model;
 
 class ModelFactory extends \pjsql\AdapterFactory {
     protected static function databaseHandle() {

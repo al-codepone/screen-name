@@ -1,6 +1,6 @@
 <?php
 
-namespace scrnnm\db;
+namespace scrnnm\model;
 
 use pjsql\DatabaseHandle;
 
@@ -10,7 +10,7 @@ class ResetPasswordModel extends TokenModel {
     }
 
     public function createToken($email) {
-        $user_model = ModelFactory::get('scrnnm\db\UserModel');
+        $user_model = ModelFactory::get('scrnnm\model\UserModel');
         $user_data = $user_model->getUserWithEmail($email);
 
         if($user_data) {

@@ -1,8 +1,8 @@
 <?php
 
-use scrnnm\db\ModelFactory;
+use scrnnm\model\ModelFactory;
 
-$verify_model = ModelFactory::get('scrnnm\db\VerifyEmailModel');
+$verify_model = ModelFactory::get('scrnnm\model\VerifyEmailModel');
 $data = $verify_model->getToken($_GET['id'], $_GET['token']);
 
 if($data) {

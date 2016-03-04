@@ -2,12 +2,12 @@
 
 require 'boot.php';
 
-use scrnnm\db\ModelFactory;
+use scrnnm\model\ModelFactory;
 
 session_name(SESSION_NAME);
 session_start();
 
-$user_model = ModelFactory::get('scrnnm\db\UserModel');
+$user_model = ModelFactory::get('scrnnm\model\UserModel');
 $user_model->logOut();
 header('Location:' . ROOT);
 exit();
