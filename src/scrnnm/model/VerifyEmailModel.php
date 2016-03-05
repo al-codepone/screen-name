@@ -19,12 +19,4 @@ class VerifyEmailModel extends TokenModel {
         parent::createToken($user_id, $token, $email);
         email($email, $subject, $message, $additionalHeaders);
     }
-
-    public function getToken($user_id, $token) {
-        return parent::getToken($user_id, $token);
-    }
-
-    public function deleteToken($tokenID) {
-        parent::deleteToken($tokenID);
-    }
 }

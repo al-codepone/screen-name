@@ -24,12 +24,4 @@ class ResetPasswordModel extends TokenModel {
             email($email, $subject, $message, $additionalHeaders);
         }
     }
-
-    public function getToken($user_id, $token) {
-        return parent::getToken($user_id, $token);
-    }
-
-    public function deleteToken($tokenID) {
-        parent::deleteToken($tokenID);
-    }
 }
