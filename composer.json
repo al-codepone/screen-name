@@ -1,4 +1,17 @@
 {
+    "name": "screen-name/screen-name",
+    "description": "Skeleton User Application",
+    "keywords": ["users", "login", "accounts", "sign up"],
+    "homepage": "https://github.com/al-codepone/screen-name",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ry Ferguson",
+            "role": "Developer",
+            "email": "rytf12@gmail.com",
+            "homepage": "http://ikitovagn.com"
+        }
+    ],
     "require": {
         "pajamasql/pajamasql": "0.5.0",
         "bouncers-book/bouncers-book": "0.5.0",
