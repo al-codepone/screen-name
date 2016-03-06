@@ -31,17 +31,6 @@ class TokenModel extends DatabaseAdapter {
             ENGINE = MYISAM');
     }
 
-    public function prune() {
-        $this->exec(sprintf('
-            DELETE FROM
-                %s
-            WHERE
-                creation_date < "%s" - INTERVAL %d DAY',
-            $this->table_name,
-            \pc\datetime_now(),
-            $this->ttl));
-    }
-
     public function createToken($user_id, $token, $data = '') {
         $this->exec(sprintf('
             INSERT INTO %s
@@ -95,4 +84,15 @@ class TokenModel extends DatabaseAdapter {
             $this->table_name,
             $token_id));
     }    
+
+    public function prune() {
+        $this->exec(sprintf('
+            DELETE FROM
+                %s
+            WHERE
+                creation_date < "%s" - INTERVAL %d DAY',
+            $this->table_name,
+            \pc\datetime_now(),
+            $this->ttl));
+    }
 }
