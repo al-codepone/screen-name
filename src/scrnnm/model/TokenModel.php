@@ -31,7 +31,7 @@ class TokenModel extends DatabaseAdapter {
             ENGINE = MYISAM');
     }
 
-    public function createToken($user_id, $token, $data = '') {
+    public function create($user_id, $token, $data = '') {
         $this->exec(sprintf('
             INSERT INTO %s
                 (user_id, token, data, creation_date)
@@ -44,7 +44,7 @@ class TokenModel extends DatabaseAdapter {
             \pc\datetime_now()));
     }
 
-    public function getToken($user_id, $token) {
+    public function get($user_id, $token) {
         $query = sprintf('
             SELECT
                 t.token_id,
@@ -75,7 +75,7 @@ class TokenModel extends DatabaseAdapter {
         }
     }
 
-    public function deleteToken($token_id) {
+    public function delete($token_id) {
         $this->exec(sprintf('
             DELETE FROM
                 %s

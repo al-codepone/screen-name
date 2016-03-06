@@ -9,7 +9,7 @@ class ResetPasswordModel extends TokenModel {
         parent::__construct($databaseHandle, TABLE_RESET_PASSWORD_TOKENS, TTL_RESET_PASSWORD);
     }
 
-    public function createToken($email) {
+    public function create($email) {
         $user_model = ModelFactory::get('scrnnm\model\UserModel');
         $user_data = $user_model->getUserWithEmail($email);
 
@@ -20,7 +20,7 @@ class ResetPasswordModel extends TokenModel {
             $message = sprintf("%s,\n\nUse this link to reset your password:\n\n%s%s%d/%s",
                 $user_data['username'], SITE, RESET_PASSWORD, $user_data['user_id'], $token);
 
-            parent::createToken($user_data['user_id'], $token);
+            parent::create($user_data['user_id'], $token);
             email($email, $subject, $message, $additional_headers);
         }
     }

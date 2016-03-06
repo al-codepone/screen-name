@@ -3,7 +3,7 @@
 use scrnnm\model\ModelFactory;
 
 $verify_model = ModelFactory::get('scrnnm\model\VerifyEmailModel');
-$data = $verify_model->getToken($_GET['id'], $_GET['token']);
+$data = $verify_model->get($_GET['id'], $_GET['token']);
 
 if($data) {
     $email = $data['data'];
@@ -11,7 +11,7 @@ if($data) {
         ? $error
         : 'Thank you, your email has been verified.';
 
-    $verify_model->deleteToken($data['token_id']);
+    $verify_model->delete($data['token_id']);
 }
 else {
     $t_content = 'Invalid verification.';

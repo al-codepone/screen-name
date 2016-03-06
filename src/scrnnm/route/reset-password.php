@@ -3,7 +3,7 @@
 use scrnnm\model\ModelFactory;
 
 $reset_model = ModelFactory::get('scrnnm\model\ResetPasswordModel');
-$token_data = $reset_model->getToken($_GET['id'], $_GET['token']);
+$token_data = $reset_model->get($_GET['id'], $_GET['token']);
 
 if($token_data) {
     $validator = new scrnnm\validator\ResetPasswordValidator();
@@ -16,7 +16,7 @@ if($token_data) {
             $t_content = reset_password($form_data, $error);
         }
         else {
-            $reset_model->deleteToken($token_data['token_id']);
+            $reset_model->delete($token_data['token_id']);
             $t_content = 'Your password was successfully reset.';
         }
     }

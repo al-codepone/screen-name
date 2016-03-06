@@ -51,7 +51,7 @@ class UserModel extends DatabaseAdapter {
             if($data['email']) {
                 $user_id = $this->conn()->insert_id;
                 $verify_model = ModelFactory::get('scrnnm\model\VerifyEmailModel');
-                $verify_model->createToken($user_id, $data['username'], $data['email']);
+                $verify_model->create($user_id, $data['username'], $data['email']);
             }
         }
     }
@@ -80,7 +80,7 @@ class UserModel extends DatabaseAdapter {
             return $this->getSessionUser();
         }
         else if(IS_REMEMBER_ME && $data = $this->getPersistentLogin()) {
-            $this->login_token->deleteToken($data['token_id']);
+            $this->login_token->delete($data['token_id']);
             $this->createPersistentLogin($data['user_id']);
 
             $_SESSION[SESSION_USER_ID] = $data['user_id'];
@@ -108,7 +108,7 @@ class UserModel extends DatabaseAdapter {
 
         if($email_states['is_new'] || $email_states['is_changed']) {
             $verify_model = ModelFactory::get('scrnnm\model\VerifyEmailModel');
-            $verify_model->createToken($user_id, $form_data['username'], $form_data['email']);
+            $verify_model->create($user_id, $form_data['username'], $form_data['email']);
         }
 
         if($email_states['is_deleted'] || $email_states['is_changed']) {
@@ -206,7 +206,7 @@ class UserModel extends DatabaseAdapter {
     //
     public function logOut() {
         if($data = $this->getPersistentLogin()) {
-            $this->login_token->deleteToken($data['token_id']);
+            $this->login_token->delete($data['token_id']);
         }
 
         setcookie(COOKIE_PERSISTENT_LOGIN, '', time() - 3600);
@@ -216,7 +216,7 @@ class UserModel extends DatabaseAdapter {
     //
     protected function createPersistentLogin($user_id) {
         $token = \pc\sha1_token();
-        $this->login_token->createToken($user_id, $token);
+        $this->login_token->create($user_id, $token);
         setcookie(COOKIE_PERSISTENT_LOGIN, "$user_id.$token",
             time() + 60*60*24*TTL_PERSISTENT_LOGIN);
     }
@@ -225,7 +225,7 @@ class UserModel extends DatabaseAdapter {
     protected function getPersistentLogin() {
         if($_COOKIE[COOKIE_PERSISTENT_LOGIN]) {
             list($user_id, $token) = explode('.', $_COOKIE[COOKIE_PERSISTENT_LOGIN]);
-            return $this->login_token->getToken($user_id, $token);
+            return $this->login_token->get($user_id, $token);
         }
     }
 
