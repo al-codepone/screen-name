@@ -19,7 +19,7 @@ class TokenModel extends DatabaseAdapter {
         $this->exec('
             CREATE TABLE ' . $this->table_name . ' (
                 token_id
-                    MEDIUMINT
+                    INT
                     UNSIGNED
                     NOT NULL
                     AUTO_INCREMENT
