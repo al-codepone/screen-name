@@ -18,10 +18,6 @@ define('MYSQL_USERNAME', 'big');
 define('MYSQL_PASSWORD', 'tree');
 define('MYSQL_DBNAME', 'myfirstdb');
 
-define('TABLE_PERSISTENT_LOGIN_TOKENS', 'persistent_login_tokens');
-define('TABLE_VERIFY_EMAIL_TOKENS', 'verify_email_tokens');
-define('TABLE_RESET_PASSWORD_TOKENS', 'reset_password_tokens');
-
 define('SESSION_NAME', 'VSID01');
 define('SESSION_USER_ID', 'user_id');
 define('SESSION_USERNAME', 'username');

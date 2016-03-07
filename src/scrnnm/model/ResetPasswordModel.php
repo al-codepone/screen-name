@@ -6,7 +6,7 @@ use pjsql\DatabaseHandle;
 
 class ResetPasswordModel extends TokenModel {
     public function __construct(DatabaseHandle $databaseHandle) {
-        parent::__construct($databaseHandle, TABLE_RESET_PASSWORD_TOKENS, TTL_RESET_PASSWORD);
+        parent::__construct($databaseHandle, 'treset_password_token', TTL_RESET_PASSWORD);
     }
 
     public function create($email) {

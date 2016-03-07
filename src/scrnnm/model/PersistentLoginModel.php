@@ -8,7 +8,7 @@ class PersistentLoginModel extends TokenModel {
     public function __construct(DatabaseHandle $database_handle) {
         parent::__construct(
             $database_handle,
-            TABLE_PERSISTENT_LOGIN_TOKENS,
+            'tpersistent_login_token',
             TTL_PERSISTENT_LOGIN);
     }
 
