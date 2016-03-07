@@ -6,16 +6,11 @@ use pjsql\DatabaseAdapter;
 use pjsql\DatabaseHandle;
 
 class UserModel extends DatabaseAdapter {
-    protected $login_token;
+    protected $persistent_model;
 
     public function __construct(DatabaseHandle $database_handle) {
         parent::__construct($database_handle);
-
-        //
-        $this->login_token = new TokenModel(
-            $database_handle,
-            TABLE_PERSISTENT_LOGIN_TOKENS,
-            TTL_PERSISTENT_LOGIN);
+        $this->persistent_model = ModelFactory::get('scrnnm\model\PersistentLoginModel');
     }
 
     //
@@ -28,7 +23,7 @@ class UserModel extends DatabaseAdapter {
                 password VARCHAR(128))
             ENGINE = MYISAM');
 
-        $this->login_token->install();
+        $this->persistent_model->install();
     }
 
     //
@@ -79,9 +74,9 @@ class UserModel extends DatabaseAdapter {
         if(isset($_SESSION[SESSION_USER_ID])) {
             return $this->getSessionUser();
         }
-        else if(IS_REMEMBER_ME && $data = $this->getPersistentLogin()) {
-            $this->login_token->delete($data['token_id']);
-            $this->createPersistentLogin($data['user_id']);
+        else if(IS_REMEMBER_ME && $data = $this->persistent_model->get()) {
+            $this->persistent_model->delete($data['token_id']);
+            $this->persistent_model->create($data['user_id']);
 
             $_SESSION[SESSION_USER_ID] = $data['user_id'];
             $_SESSION[SESSION_USERNAME] = $data['username'];
@@ -184,7 +179,7 @@ class UserModel extends DatabaseAdapter {
 
     //
     public function prune() {
-        $this->login_token->prune();
+        $this->persistent_model->prune();
     }
 
     //
@@ -196,7 +191,7 @@ class UserModel extends DatabaseAdapter {
         }
 
         if(IS_REMEMBER_ME && $form_data['remember_me']) {
-            $this->createPersistentLogin($user_data['user_id']);
+            $this->persistent_model->create($user_data['user_id']);
         }
 
         $_SESSION[SESSION_USER_ID] = $user_data['user_id'];
@@ -205,28 +200,12 @@ class UserModel extends DatabaseAdapter {
 
     //
     public function logOut() {
-        if($data = $this->getPersistentLogin()) {
-            $this->login_token->delete($data['token_id']);
+        if($data = $this->persistent_model->get()) {
+            $this->persistent_model->delete($data['token_id']);
         }
 
         setcookie(COOKIE_PERSISTENT_LOGIN, '', time() - 3600);
         unset($_SESSION[SESSION_USER_ID]);
-    }
-
-    //
-    protected function createPersistentLogin($user_id) {
-        $token = \pc\sha1_token();
-        $this->login_token->create($user_id, $token);
-        setcookie(COOKIE_PERSISTENT_LOGIN, "$user_id.$token",
-            time() + 60*60*24*TTL_PERSISTENT_LOGIN);
-    }
-
-    //
-    protected function getPersistentLogin() {
-        if($_COOKIE[COOKIE_PERSISTENT_LOGIN]) {
-            list($user_id, $token) = explode('.', $_COOKIE[COOKIE_PERSISTENT_LOGIN]);
-            return $this->login_token->get($user_id, $token);
-        }
     }
 
     //
