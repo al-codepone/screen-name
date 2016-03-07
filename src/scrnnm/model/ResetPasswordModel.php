@@ -5,8 +5,8 @@ namespace scrnnm\model;
 use pjsql\DatabaseHandle;
 
 class ResetPasswordModel extends TokenModel {
-    public function __construct(DatabaseHandle $databaseHandle) {
-        parent::__construct($databaseHandle, 'treset_password_token', TTL_RESET_PASSWORD);
+    public function __construct(DatabaseHandle $database_handle) {
+        parent::__construct($database_handle, 'treset_password_token', TTL_RESET_PASSWORD);
     }
 
     public function create($email) {
