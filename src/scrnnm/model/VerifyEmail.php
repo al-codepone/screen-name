@@ -4,7 +4,7 @@ namespace scrnnm\model;
 
 use pjsql\DatabaseHandle;
 
-class VerifyEmailModel extends TokenModel {
+class VerifyEmail extends Token {
     public function __construct(DatabaseHandle $database_handle) {
         parent::__construct($database_handle, 'tverify_email_token', TTL_VERIFY_EMAIL);
     }

@@ -4,13 +4,13 @@ namespace scrnnm\model;
 
 use pjsql\DatabaseHandle;
 
-class ResetPasswordModel extends TokenModel {
+class ResetPassword extends Token {
     public function __construct(DatabaseHandle $database_handle) {
         parent::__construct($database_handle, 'treset_password_token', TTL_RESET_PASSWORD);
     }
 
     public function create($email) {
-        $user_model = ModelFactory::get('scrnnm\model\UserModel');
+        $user_model = ModelFactory::get('scrnnm\model\User');
         $user_data = $user_model->getUserWithEmail($email);
 
         if($user_data) {

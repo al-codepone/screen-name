@@ -5,7 +5,7 @@ namespace scrnnm\model;
 use pjsql\DatabaseAdapter;
 use pjsql\DatabaseHandle;
 
-class TokenModel extends DatabaseAdapter {
+class Token extends DatabaseAdapter {
     private $table_name;
     private $ttl;
 

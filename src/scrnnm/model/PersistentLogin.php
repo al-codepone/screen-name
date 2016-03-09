@@ -4,7 +4,7 @@ namespace scrnnm\model;
 
 use pjsql\DatabaseHandle;
 
-class PersistentLoginModel extends TokenModel {
+class PersistentLogin extends Token {
     public function __construct(DatabaseHandle $database_handle) {
         parent::__construct(
             $database_handle,

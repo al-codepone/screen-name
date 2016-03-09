@@ -2,7 +2,7 @@
 
 use scrnnm\model\ModelFactory;
 
-$reset_model = ModelFactory::get('scrnnm\model\ResetPasswordModel');
+$reset_model = ModelFactory::get('scrnnm\model\ResetPassword');
 $token_data = $reset_model->get($_GET['id'], $_GET['token']);
 
 if($token_data) {

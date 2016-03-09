@@ -5,12 +5,12 @@ namespace scrnnm\model;
 use pjsql\DatabaseAdapter;
 use pjsql\DatabaseHandle;
 
-class UserModel extends DatabaseAdapter {
+class User extends DatabaseAdapter {
     protected $persistent_model;
 
     public function __construct(DatabaseHandle $database_handle) {
         parent::__construct($database_handle);
-        $this->persistent_model = ModelFactory::get('scrnnm\model\PersistentLoginModel');
+        $this->persistent_model = ModelFactory::get('scrnnm\model\PersistentLogin');
     }
 
     //
@@ -45,7 +45,7 @@ class UserModel extends DatabaseAdapter {
 
             if($data['email']) {
                 $user_id = $this->conn()->insert_id;
-                $verify_model = ModelFactory::get('scrnnm\model\VerifyEmailModel');
+                $verify_model = ModelFactory::get('scrnnm\model\VerifyEmail');
                 $verify_model->create($user_id, $data['username'], $data['email']);
             }
         }
@@ -102,7 +102,7 @@ class UserModel extends DatabaseAdapter {
         }
 
         if($email_states['is_new'] || $email_states['is_changed']) {
-            $verify_model = ModelFactory::get('scrnnm\model\VerifyEmailModel');
+            $verify_model = ModelFactory::get('scrnnm\model\VerifyEmail');
             $verify_model->create($user_id, $form_data['username'], $form_data['email']);
         }
 

@@ -9,7 +9,7 @@ if(list($form_data, $errors) = $validator->validate()) {
         $t_content = forgot_password($form_data, $errors);
     }
     else {
-        $reset_model = ModelFactory::get('scrnnm\model\ResetPasswordModel');
+        $reset_model = ModelFactory::get('scrnnm\model\ResetPassword');
         $reset_model->create($form_data['email']);
         $t_content = sprintf("If the email address you entered, %s,
             is associated with a user account, then you will receive

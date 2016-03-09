@@ -2,7 +2,7 @@
 
 use scrnnm\model\ModelFactory;
 
-$verify_model = ModelFactory::get('scrnnm\model\VerifyEmailModel');
+$verify_model = ModelFactory::get('scrnnm\model\VerifyEmail');
 $data = $verify_model->get($_GET['id'], $_GET['token']);
 
 if($data) {
