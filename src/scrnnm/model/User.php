@@ -27,11 +27,11 @@ class User extends DatabaseAdapter {
     }
 
     //
-    public function createUser($data) {
-        if($this->getUserWithUsername($data['username'])) {
+    public function create($data) {
+        if($this->getWithUsername($data['username'])) {
             return username_taken($data['username']);
         }
-        else if($this->getUserWithEmail($data['email'])) {
+        else if($this->getWithEmail($data['email'])) {
             return email_taken($data['email']);
         }
         else {
@@ -52,27 +52,27 @@ class User extends DatabaseAdapter {
     }
 
     //
-    public function getUserWithUID($user_id) {
-        return $this->getUser(sprintf('user_id = %d', $user_id));
+    public function getWithId($user_id) {
+        return $this->get(sprintf('user_id = %d', $user_id));
     }
 
     //
-    public function getUserWithUsername($username) {
-        return $this->getUser(sprintf('username = "%s"',
+    public function getWithUsername($username) {
+        return $this->get(sprintf('username = "%s"',
             $this->esc($username)));
     }
 
     //
-    public function getUserWithEmail($email) {
+    public function getWithEmail($email) {
         return $email
-            ? $this->getUser(sprintf('email = "%s"', $this->esc($email)))
+            ? $this->get(sprintf('email = "%s"', $this->esc($email)))
             : null;
     }
 
     //
-    public function getActiveUser() {
+    public function getActive() {
         if(isset($_SESSION[SESSION_USER_ID])) {
-            return $this->getSessionUser();
+            return $this->getSession();
         }
         else if(IS_REMEMBER_ME && $data = $this->persistent_model->get()) {
             $this->persistent_model->delete($data['token_id']);
@@ -80,15 +80,15 @@ class User extends DatabaseAdapter {
 
             $_SESSION[SESSION_USER_ID] = $data['user_id'];
             $_SESSION[SESSION_USERNAME] = $data['username'];
-            return $this->getSessionUser();
+            return $this->getSession();
         }
     }
 
     //this is called when the user submits the edit account form
-    public function updateUser($user_id, $form_data) {
-        $user_data = $this->getUserWithUID($user_id);
-        $username_user_data = $this->getUserWithUsername($form_data['username']);
-        $email_user_data = $this->getUserWithEmail($form_data['email']);
+    public function update($user_id, $form_data) {
+        $user_data = $this->getWithId($user_id);
+        $username_user_data = $this->getWithUsername($form_data['username']);
+        $email_user_data = $this->getWithEmail($form_data['email']);
         $email_states = email_states($user_data, $form_data);
 
         if($user_data['password'] != \pc\bcrypt_hash($form_data['current_password'], $user_data['password'])) {
@@ -131,7 +131,7 @@ class User extends DatabaseAdapter {
 
     //
     public function updateEmail($user_id, $email) {
-        if($this->getUserWithEmail($email)) {
+        if($this->getWithEmail($email)) {
             return email_taken($email);
         }
 
@@ -160,8 +160,8 @@ class User extends DatabaseAdapter {
     }
 
     //
-    public function deleteUser($user_id, $form_data) {
-        $user_data = $this->getUserWithUID($user_id);
+    public function delete($user_id, $form_data) {
+        $user_data = $this->getWithId($user_id);
 
         if($user_data['password'] != \pc\bcrypt_hash($form_data['current_password'], $user_data['password'])) {
             return 'Incorrect current password';
@@ -184,7 +184,7 @@ class User extends DatabaseAdapter {
 
     //
     public function login(array $form_data) {
-        $user_data = $this->getUserWithUsername($form_data['username']);
+        $user_data = $this->getWithUsername($form_data['username']);
 
         if(!$user_data || $user_data['password'] != \pc\bcrypt_hash($form_data['password'], $user_data['password'])) {
             return 'Incorrect username and password';
@@ -209,14 +209,14 @@ class User extends DatabaseAdapter {
     }
 
     //
-    protected function getSessionUser() {
+    protected function getSession() {
         return array(
             'user_id' => $_SESSION[SESSION_USER_ID],
             'username' => $_SESSION[SESSION_USERNAME]);
     }
 
     //
-    protected function getUser($condition) {
+    protected function get($condition) {
         $data = $this->query(sprintf('
             SELECT
                 user_id,

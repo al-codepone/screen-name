@@ -7,7 +7,7 @@ if(!$user) {
 }
 else if(list($form_data, $errors) = $validator->validate()) {
     if($form_data['delete_flag']) {
-        $t_content = ($error = $user_model->deleteUser($user['user_id'], $form_data))
+        $t_content = ($error = $user_model->delete($user['user_id'], $form_data))
             ? edit_account($form_data, $error)
             : 'Your account was successfully deleted.';
 
@@ -17,7 +17,7 @@ else if(list($form_data, $errors) = $validator->validate()) {
         $t_content = edit_account($form_data, $errors);
     }
     else {
-        $t_content = is_array($result = $user_model->updateUser($user['user_id'], $form_data))
+        $t_content = is_array($result = $user_model->update($user['user_id'], $form_data))
             ? account_updated($result, $form_data)
             : edit_account($form_data, $result);
 
@@ -25,7 +25,7 @@ else if(list($form_data, $errors) = $validator->validate()) {
     }
 }
 else {
-    $user_data = $user_model->getUserWithUID($user['user_id']);
+    $user_data = $user_model->getWithId($user['user_id']);
     $form_data = $validator->values();
     $form_data['username'] = $user_data['username'];
     $form_data['email'] = $user_data['email'];

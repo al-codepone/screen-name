@@ -8,7 +8,7 @@ session_name(SESSION_NAME);
 session_start();
 
 $user_model = ModelFactory::get('scrnnm\model\User');
-$user = $user_model->getActiveUser();
+$user = $user_model->getActive();
 
 include SRC . 'scrnnm/route/' . pc\route(array(
     null => 'home.php',

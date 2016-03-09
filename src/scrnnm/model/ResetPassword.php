@@ -11,7 +11,7 @@ class ResetPassword extends Token {
 
     public function create($email) {
         $user_model = ModelFactory::get('scrnnm\model\User');
-        $user_data = $user_model->getUserWithEmail($email);
+        $user_data = $user_model->getWithEmail($email);
 
         if($user_data) {
             $token = \pc\sha1_token();
