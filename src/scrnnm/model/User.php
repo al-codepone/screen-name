@@ -90,8 +90,11 @@ class User extends DatabaseAdapter {
         $username_user_data = $this->getWithUsername($form_data['username']);
         $email_user_data = $this->getWithEmail($form_data['email']);
         $email_states = email_states($user_data, $form_data);
+        $compute_hash = \pc\bcrypt_hash(
+            $form_data['current_password'],
+            $user_data['password']);
 
-        if($user_data['password'] != \pc\bcrypt_hash($form_data['current_password'], $user_data['password'])) {
+        if($user_data['password'] != $compute_hash) {
             return 'Incorrect current password';
         }
         else if($username_user_data && $user_id != $username_user_data['user_id']) {
@@ -103,7 +106,10 @@ class User extends DatabaseAdapter {
 
         if($email_states['is_new'] || $email_states['is_changed']) {
             $verify_model = ModelFactory::get('scrnnm\model\VerifyEmail');
-            $verify_model->create($user_id, $form_data['username'], $form_data['email']);
+            $verify_model->create(
+                $user_id,
+                $form_data['username'],
+                $form_data['email']);
         }
 
         if($email_states['is_deleted'] || $email_states['is_changed']) {
@@ -111,7 +117,10 @@ class User extends DatabaseAdapter {
         }
 
         $setPassword = $form_data['password']
-            ? sprintf(', password = "%s"', $this->esc(\pc\bcrypt_hash($form_data['password'], BCRYPT_COST)))
+            ? sprintf(
+                ', password = "%s"',
+                $this->esc(\pc\bcrypt_hash($form_data['password'], BCRYPT_COST)))
+
             : '';
 
         $this->exec(sprintf('
@@ -162,8 +171,11 @@ class User extends DatabaseAdapter {
     //
     public function delete($user_id, $form_data) {
         $user_data = $this->getWithId($user_id);
+        $compute_hash = \pc\bcrypt_hash(
+            $form_data['current_password'],
+            $user_data['password']);
 
-        if($user_data['password'] != \pc\bcrypt_hash($form_data['current_password'], $user_data['password'])) {
+        if($user_data['password'] != $compute_hash) {
             return 'Incorrect current password';
         }
 
@@ -185,8 +197,11 @@ class User extends DatabaseAdapter {
     //
     public function login(array $form_data) {
         $user_data = $this->getWithUsername($form_data['username']);
+        $compute_hash = \pc\bcrypt_hash(
+            $form_data['password'],
+            $user_data['password']);
 
-        if(!$user_data || $user_data['password'] != \pc\bcrypt_hash($form_data['password'], $user_data['password'])) {
+        if(!$user_data || $user_data['password'] != $compute_hash) {
             return 'Incorrect username and password';
         }
 
