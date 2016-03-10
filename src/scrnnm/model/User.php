@@ -58,7 +58,8 @@ class User extends DatabaseAdapter {
 
     //
     public function getWithUsername($username) {
-        return $this->get(sprintf('username = "%s"',
+        return $this->get(sprintf(
+            'username = "%s"',
             $this->esc($username)));
     }
 
