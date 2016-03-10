@@ -116,7 +116,7 @@ class User extends DatabaseAdapter {
             $this->updateEmail($user_id, '');
         }
 
-        $setPassword = $form_data['password']
+        $set_password = $form_data['password']
             ? sprintf(
                 ', password = "%s"',
                 $this->esc(\pc\bcrypt_hash($form_data['password'], BCRYPT_COST)))
@@ -131,7 +131,7 @@ class User extends DatabaseAdapter {
             WHERE
                 user_id = %d',
             $this->esc($form_data['username']),
-            $setPassword,
+            $set_password,
             $user_id));
 
         $_SESSION[SESSION_USERNAME] = $form_data['username'];
