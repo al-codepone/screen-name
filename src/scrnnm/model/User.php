@@ -27,12 +27,12 @@ class User extends DatabaseAdapter {
     }
 
     //
-    public function create($data) {
-        if($this->getWithUsername($data['username'])) {
-            return username_taken($data['username']);
+    public function create(array $form_data) {
+        if($this->getWithUsername($form_data['username'])) {
+            return username_taken($form_data['username']);
         }
-        else if($this->getWithEmail($data['email'])) {
-            return email_taken($data['email']);
+        else if($this->getWithEmail($form_data['email'])) {
+            return email_taken($form_data['email']);
         }
         else {
             $this->exec(sprintf('
@@ -40,13 +40,13 @@ class User extends DatabaseAdapter {
                     (username, password)
                 VALUES
                     ("%s", "%s")',
-                $this->esc($data['username']),
-                $this->esc(\pc\bcrypt_hash($data['password'], BCRYPT_COST))));
+                $this->esc($form_data['username']),
+                $this->esc(\pc\bcrypt_hash($form_data['password'], BCRYPT_COST))));
 
-            if($data['email']) {
+            if($form_data['email']) {
                 $user_id = $this->conn()->insert_id;
                 $verify_model = ModelFactory::get('scrnnm\model\VerifyEmail');
-                $verify_model->create($user_id, $data['username'], $data['email']);
+                $verify_model->create($user_id, $form_data['username'], $form_data['email']);
             }
         }
     }
@@ -85,7 +85,7 @@ class User extends DatabaseAdapter {
     }
 
     //this is called when the user submits the edit account form
-    public function update($user_id, $form_data) {
+    public function update($user_id, array $form_data) {
         $user_data = $this->getWithId($user_id);
         $username_user_data = $this->getWithUsername($form_data['username']);
         $email_user_data = $this->getWithEmail($form_data['email']);
@@ -156,7 +156,7 @@ class User extends DatabaseAdapter {
     }
 
     //
-    public function updatePassword($user_id, $data) {
+    public function updatePassword($user_id, array $form_data) {
         $this->exec(sprintf('
             UPDATE
                 tuser
@@ -164,12 +164,12 @@ class User extends DatabaseAdapter {
                 password = "%s"
             WHERE
                 user_id = %d',
-            $this->esc(\pc\bcrypt_hash($data['password'], BCRYPT_COST)),
+            $this->esc(\pc\bcrypt_hash($form_data['password'], BCRYPT_COST)),
             $user_id));
     }
 
     //
-    public function delete($user_id, $form_data) {
+    public function delete($user_id, array $form_data) {
         $user_data = $this->getWithId($user_id);
         $compute_hash = \pc\bcrypt_hash(
             $form_data['current_password'],
