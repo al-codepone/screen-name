@@ -20,7 +20,7 @@ class User extends DatabaseAdapter {
                 user_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
                 username VARCHAR(32) UNIQUE,
                 email VARCHAR(255) DEFAULT "",
-                password VARCHAR(128))
+                password VARCHAR(255))
             ENGINE = MYISAM');
 
         $this->persistent_model->install();
@@ -41,7 +41,7 @@ class User extends DatabaseAdapter {
                 VALUES
                     (?, ?)',
                 $form_data['username'],
-                \pc\bcrypt_hash($form_data['password'], BCRYPT_COST));
+                password_hash($form_data['password'], PASSWORD_DEFAULT));
 
             if($form_data['email']) {
                 $user_id = $this->conn()->insert_id;
@@ -89,11 +89,11 @@ class User extends DatabaseAdapter {
         $username_user_data = $this->getWithUsername($form_data['username']);
         $email_user_data = $this->getWithEmail($form_data['email']);
         $email_states = email_states($user_data, $form_data);
-        $compute_hash = \pc\bcrypt_hash(
+        $is_password_correct = password_verify(
             $form_data['current_password'],
             $user_data['password']);
 
-        if($user_data['password'] != $compute_hash) {
+        if(!$is_password_correct) {
             return 'Incorrect current password';
         }
         else if($username_user_data && $user_id != $username_user_data['user_id']) {
@@ -125,7 +125,7 @@ class User extends DatabaseAdapter {
                 user_id = ?',
             $form_data['username'],
             $form_data['password'],
-            \pc\bcrypt_hash($form_data['password'], BCRYPT_COST),
+            password_hash($form_data['password'], PASSWORD_DEFAULT),
             $user_id);
 
         $_SESSION[SESSION_USERNAME] = $form_data['username'];
@@ -158,18 +158,18 @@ class User extends DatabaseAdapter {
                 password = ?
             WHERE
                 user_id = ?',
-            \pc\bcrypt_hash($form_data['password'], BCRYPT_COST),
+            password_hash($form_data['password'], PASSWORD_DEFAULT),
             $user_id);
     }
 
     //
     public function delete($user_id, array $form_data) {
         $user_data = $this->getWithId($user_id);
-        $compute_hash = \pc\bcrypt_hash(
+        $is_password_correct = password_verify(
             $form_data['current_password'],
             $user_data['password']);
 
-        if($user_data['password'] != $compute_hash) {
+        if(!$is_password_correct) {
             return 'Incorrect current password';
         }
 
@@ -191,11 +191,11 @@ class User extends DatabaseAdapter {
     //
     public function login(array $form_data) {
         $user_data = $this->getWithUsername($form_data['username']);
-        $compute_hash = \pc\bcrypt_hash(
+        $is_password_correct = password_verify(
             $form_data['password'],
             $user_data['password']);
 
-        if(!$user_data || $user_data['password'] != $compute_hash) {
+        if(!$user_data || !$is_password_correct) {
             return 'Incorrect username and password';
         }
 

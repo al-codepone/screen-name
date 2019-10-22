@@ -25,7 +25,7 @@ class Token extends DatabaseAdapter {
                     AUTO_INCREMENT
                     PRIMARY KEY,
                 user_id MEDIUMINT UNSIGNED,
-                token VARCHAR(128),
+                token VARCHAR(255),
                 data VARCHAR(255),
                 creation_date DATETIME)
             ENGINE = MYISAM');
@@ -38,7 +38,7 @@ class Token extends DatabaseAdapter {
             VALUES
                 (?, ?, ?, ?)',
             $user_id,
-            \pc\bcrypt_hash($token, BCRYPT_COST),
+            password_hash($token, PASSWORD_DEFAULT),
             $data,
             \pc\datetime_now());
     }
@@ -67,7 +67,7 @@ class Token extends DatabaseAdapter {
             $this->ttl);
 
         foreach($data as $row) {
-            if($row['token'] == \pc\bcrypt_hash($token, $row['token'])) {
+            if(password_verify($token, $row['token'])) {
                 return $row;
             }
         }
