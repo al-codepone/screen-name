@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d08f1958c7f66cabb83f0810f44b0965",
-    "content-hash": "5d75a1ceb0052286e70dec210b0fc80b",
+    "content-hash": "42d65f782c5ac867848d1f2ae67d836a",
     "packages": [
         {
             "name": "bouncers-book/bouncers-book",
@@ -49,7 +48,7 @@
                 "form",
                 "validator"
             ],
-            "time": "2014-08-12 17:31:36"
+            "time": "2014-08-12T17:31:36+00:00"
         },
         {
             "name": "corn-wand/corn-wand",
@@ -94,24 +93,27 @@
                 "functions",
                 "html"
             ],
-            "time": "2014-07-02 06:59:38"
+            "time": "2014-07-02T06:59:38+00:00"
         },
         {
             "name": "pajamasql/pajamasql",
-            "version": "0.5.0",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/al-codepone/pajamaSQL.git",
-                "reference": "399756d83249cd9acb2b6788fe951eee6fc52346"
+                "reference": "982c9e25e010d46bc2855b411631805c2c5f847e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/al-codepone/pajamaSQL/zipball/399756d83249cd9acb2b6788fe951eee6fc52346",
-                "reference": "399756d83249cd9acb2b6788fe951eee6fc52346",
+                "url": "https://api.github.com/repos/al-codepone/pajamaSQL/zipball/982c9e25e010d46bc2855b411631805c2c5f847e",
+                "reference": "982c9e25e010d46bc2855b411631805c2c5f847e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8"
             },
             "type": "library",
             "autoload": {
@@ -138,7 +140,7 @@
                 "models",
                 "sql"
             ],
-            "time": "2014-07-12 23:26:11"
+            "time": "2019-10-16T15:38:31+00:00"
         },
         {
             "name": "paper-cello/paper-cello",
@@ -187,7 +189,7 @@
                 "sha1",
                 "token"
             ],
-            "time": "2016-02-28 20:29:54"
+            "time": "2016-02-28T20:29:54+00:00"
         }
     ],
     "packages-dev": [],

@@ -32,20 +32,19 @@ class Token extends DatabaseAdapter {
     }
 
     public function create($user_id, $token, $data = '') {
-        $this->exec(sprintf('
-            INSERT INTO %s
+        $this->exec('
+            INSERT INTO ' . $this->table_name . '
                 (user_id, token, data, creation_date)
             VALUES
-                (%d, "%s", "%s", "%s")',
-            $this->table_name,
+                (?, ?, ?, ?)',
             $user_id,
-            $this->esc(\pc\bcrypt_hash($token, BCRYPT_COST)),
-            $this->esc($data),
-            \pc\datetime_now()));
+            \pc\bcrypt_hash($token, BCRYPT_COST),
+            $data,
+            \pc\datetime_now());
     }
 
     public function get($user_id, $token) {
-        $query = sprintf('
+        $data = $this->query('
             SELECT
                 t.token_id,
                 t.token,
@@ -53,22 +52,21 @@ class Token extends DatabaseAdapter {
                 u.user_id,
                 u.username
             FROM
-                %s t
+                ' . $this->table_name . ' t
             JOIN
                 tuser u
             ON
                 t.user_id = u.user_id
             WHERE
-                t.user_id = %d AND
-                t.creation_date > "%s" - INTERVAL %d DAY
+                t.user_id = ? AND
+                t.creation_date > ? - INTERVAL ? DAY
             ORDER BY
                 t.creation_date DESC',
-            $this->table_name,
             $user_id,
             \pc\datetime_now(),
             $this->ttl);
 
-        foreach($this->query($query) as $row) {
+        foreach($data as $row) {
             if($row['token'] == \pc\bcrypt_hash($token, $row['token'])) {
                 return $row;
             }
@@ -76,23 +74,21 @@ class Token extends DatabaseAdapter {
     }
 
     public function delete($token_id) {
-        $this->exec(sprintf('
+        $this->exec('
             DELETE FROM
-                %s
+                ' . $this->table_name . '
             WHERE
-                token_id = %d',
-            $this->table_name,
-            $token_id));
+                token_id = ?',
+            $token_id);
     }    
 
     public function prune() {
-        $this->exec(sprintf('
+        $this->exec('
             DELETE FROM
-                %s
+                ' . $this->table_name . '
             WHERE
-                creation_date < "%s" - INTERVAL %d DAY',
-            $this->table_name,
+                creation_date < ? - INTERVAL ? DAY',
             \pc\datetime_now(),
-            $this->ttl));
+            $this->ttl);
     }
 }

@@ -35,13 +35,13 @@ class User extends DatabaseAdapter {
             return email_taken($form_data['email']);
         }
         else {
-            $this->exec(sprintf('
+            $this->exec('
                 INSERT INTO tuser
                     (username, password)
                 VALUES
-                    ("%s", "%s")',
-                $this->esc($form_data['username']),
-                $this->esc(\pc\bcrypt_hash($form_data['password'], BCRYPT_COST))));
+                    (?, ?)',
+                $form_data['username'],
+                \pc\bcrypt_hash($form_data['password'], BCRYPT_COST));
 
             if($form_data['email']) {
                 $user_id = $this->conn()->insert_id;
@@ -53,20 +53,18 @@ class User extends DatabaseAdapter {
 
     //
     public function getWithId($user_id) {
-        return $this->get(sprintf('user_id = %d', $user_id));
+        return $this->get($user_id);
     }
 
     //
     public function getWithUsername($username) {
-        return $this->get(sprintf(
-            'username = "%s"',
-            $this->esc($username)));
+        return $this->get(-1, $username);
     }
 
     //
     public function getWithEmail($email) {
         return $email
-            ? $this->get(sprintf('email = "%s"', $this->esc($email)))
+            ? $this->get(-1, '', $email)
             : null;
     }
 
@@ -117,23 +115,18 @@ class User extends DatabaseAdapter {
             $this->updateEmail($user_id, '');
         }
 
-        $set_password = $form_data['password']
-            ? sprintf(
-                ', password = "%s"',
-                $this->esc(\pc\bcrypt_hash($form_data['password'], BCRYPT_COST)))
-
-            : '';
-
-        $this->exec(sprintf('
+        $this->exec('
             UPDATE
                 tuser
             SET
-                username = "%s"%s
+                username = ?,
+                password = if(? <> "", ?, password)
             WHERE
-                user_id = %d',
-            $this->esc($form_data['username']),
-            $set_password,
-            $user_id));
+                user_id = ?',
+            $form_data['username'],
+            $form_data['password'],
+            \pc\bcrypt_hash($form_data['password'], BCRYPT_COST),
+            $user_id);
 
         $_SESSION[SESSION_USERNAME] = $form_data['username'];
         return $user_data;
@@ -145,28 +138,28 @@ class User extends DatabaseAdapter {
             return email_taken($email);
         }
 
-        $this->exec(sprintf('
+        $this->exec('
             UPDATE
                 tuser
             SET
-                email = "%s"
+                email = ?
             WHERE
-                user_id = %d',
-            $this->esc($email),
-            $user_id));
+                user_id = ?',
+            $email,
+            $user_id);
     }
 
     //
     public function updatePassword($user_id, array $form_data) {
-        $this->exec(sprintf('
+        $this->exec('
             UPDATE
                 tuser
             SET
-                password = "%s"
+                password = ?
             WHERE
-                user_id = %d',
-            $this->esc(\pc\bcrypt_hash($form_data['password'], BCRYPT_COST)),
-            $user_id));
+                user_id = ?',
+            \pc\bcrypt_hash($form_data['password'], BCRYPT_COST),
+            $user_id);
     }
 
     //
@@ -180,12 +173,12 @@ class User extends DatabaseAdapter {
             return 'Incorrect current password';
         }
 
-        $this->exec(sprintf('
+        $this->exec('
             DELETE FROM
                 tuser
             WHERE
-                user_id = %d',
-            $user_id));
+                user_id = ?',
+            $user_id);
 
         unset($_SESSION[SESSION_USER_ID]);
     }
@@ -232,8 +225,8 @@ class User extends DatabaseAdapter {
     }
 
     //
-    protected function get($condition) {
-        $data = $this->query(sprintf('
+    protected function get($user_id, $username = '', $email = 'x') {
+        $data = $this->query('
             SELECT
                 user_id,
                 username,
@@ -242,8 +235,12 @@ class User extends DatabaseAdapter {
             FROM
                 tuser
             WHERE
-                %s',
-            $condition));
+                user_id = ? or
+                username = ? or
+                email = ?',
+            $user_id,
+            $username,
+            $email);
 
         return $data[0];
     }
