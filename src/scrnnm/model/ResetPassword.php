@@ -21,7 +21,7 @@ class ResetPassword extends Token {
             $subject = 'Reset Your Password';
             $additional_headers = sprintf("From: %s\r\n", EMAIL_FROM);
             $message = sprintf(
-                "%s,\n\nUse this link to reset your password:\n\n%s%s%d/%s",
+                "%s,\r\n\r\nUse this link to reset your password:\r\n\r\n%s%s%d/%s",
                 $user_data['username'],
                 SITE,
                 RESET_PASSWORD,

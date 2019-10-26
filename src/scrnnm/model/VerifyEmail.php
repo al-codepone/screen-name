@@ -17,7 +17,7 @@ class VerifyEmail extends Token {
         $subject = 'Verify Your Email';
         $additional_headers = sprintf("From: %s\r\n", EMAIL_FROM);
         $message = sprintf(
-            "%s,\n\nClick the link to verify your email:\n\n%s%s%d/%s",
+            "%s,\r\n\r\nClick the link to verify your email:\r\n\r\n%s%s%d/%s",
             $username,
             SITE,
             VERIFY_EMAIL,
