@@ -15,7 +15,9 @@ class PersistentLogin extends Token {
     public function create($user_id) {
         $token = \pc\sha1_token();
         parent::create($user_id, $token);
-        setcookie(COOKIE_PERSISTENT_LOGIN, "$user_id.$token",
+        setcookie(
+            COOKIE_PERSISTENT_LOGIN,
+            "$user_id.$token",
             time() + 60*60*24*TTL_PERSISTENT_LOGIN);
     }
 

@@ -17,25 +17,19 @@ class Token extends DatabaseAdapter {
 
     public function install() {
         $this->exec('
-            CREATE TABLE ' . $this->table_name . ' (
-                token_id
-                    INT
-                    UNSIGNED
-                    NOT NULL
-                    AUTO_INCREMENT
-                    PRIMARY KEY,
-                user_id MEDIUMINT UNSIGNED,
-                token VARCHAR(255),
-                data VARCHAR(255),
-                creation_date DATETIME)
-            ENGINE = MYISAM');
+            create table ' . $this->table_name . ' (
+                token_id int unsigned auto_increment primary key,
+                user_id int unsigned not null,
+                token varchar(255) not null,
+                data varchar(255),
+                creation_date datetime not null)');
     }
 
     public function create($user_id, $token, $data = '') {
         $this->exec('
-            INSERT INTO ' . $this->table_name . '
+            insert into ' . $this->table_name . '
                 (user_id, token, data, creation_date)
-            VALUES
+            values
                 (?, ?, ?, ?)',
             $user_id,
             password_hash($token, PASSWORD_DEFAULT),
@@ -45,23 +39,23 @@ class Token extends DatabaseAdapter {
 
     public function get($user_id, $token) {
         $data = $this->query('
-            SELECT
+            select
                 t.token_id,
                 t.token,
                 t.data,
                 u.user_id,
                 u.username
-            FROM
+            from
                 ' . $this->table_name . ' t
-            JOIN
+            join
                 tuser u
-            ON
+            on
                 t.user_id = u.user_id
-            WHERE
-                t.user_id = ? AND
-                t.creation_date > ? - INTERVAL ? DAY
-            ORDER BY
-                t.creation_date DESC',
+            where
+                t.user_id = ? and
+                t.creation_date > ? - interval ? day
+            order by
+                t.creation_date desc',
             $user_id,
             \pc\datetime_now(),
             $this->ttl);
@@ -75,18 +69,18 @@ class Token extends DatabaseAdapter {
 
     public function delete($token_id) {
         $this->exec('
-            DELETE FROM
+            delete from
                 ' . $this->table_name . '
-            WHERE
+            where
                 token_id = ?',
             $token_id);
     }    
 
     public function prune() {
         $this->exec('
-            DELETE FROM
+            delete from
                 ' . $this->table_name . '
-            WHERE
+            where
                 creation_date < ? - INTERVAL ? DAY',
             \pc\datetime_now(),
             $this->ttl);

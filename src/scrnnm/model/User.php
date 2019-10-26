@@ -13,20 +13,17 @@ class User extends DatabaseAdapter {
         $this->persistent_model = ModelFactory::get('scrnnm\model\PersistentLogin');
     }
 
-    //
     public function install() {
         $this->exec('
-            CREATE TABLE tuser (
-                user_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                username VARCHAR(32) UNIQUE,
-                email VARCHAR(255) DEFAULT "",
-                password VARCHAR(255))
-            ENGINE = MYISAM');
+            create table tuser (
+                user_id int unsigned auto_increment primary key,
+                username varchar(32) unique,
+                email varchar(255) default "",
+                password varchar(255))');
 
         $this->persistent_model->install();
     }
 
-    //
     public function create(array $form_data) {
         if($this->getWithUsername($form_data['username'])) {
             return username_taken($form_data['username']);
@@ -36,9 +33,9 @@ class User extends DatabaseAdapter {
         }
         else {
             $this->exec('
-                INSERT INTO tuser
+                insert into tuser
                     (username, password)
-                VALUES
+                values
                     (?, ?)',
                 $form_data['username'],
                 password_hash($form_data['password'], PASSWORD_DEFAULT));
@@ -51,24 +48,20 @@ class User extends DatabaseAdapter {
         }
     }
 
-    //
     public function getWithId($user_id) {
         return $this->get($user_id);
     }
 
-    //
     public function getWithUsername($username) {
         return $this->get(-1, $username);
     }
 
-    //
     public function getWithEmail($email) {
         return $email
             ? $this->get(-1, '', $email)
             : null;
     }
 
-    //
     public function getActive() {
         if(isset($_SESSION[SESSION_USER_ID])) {
             return $this->getSession();
@@ -83,7 +76,6 @@ class User extends DatabaseAdapter {
         }
     }
 
-    //this is called when the user submits the edit account form
     public function update($user_id, array $form_data) {
         $user_data = $this->getWithId($user_id);
         $username_user_data = $this->getWithUsername($form_data['username']);
@@ -116,12 +108,12 @@ class User extends DatabaseAdapter {
         }
 
         $this->exec('
-            UPDATE
+            update
                 tuser
-            SET
+            set
                 username = ?,
                 password = if(? <> "", ?, password)
-            WHERE
+            where
                 user_id = ?',
             $form_data['username'],
             $form_data['password'],
@@ -139,11 +131,11 @@ class User extends DatabaseAdapter {
         }
 
         $this->exec('
-            UPDATE
+            update
                 tuser
-            SET
+            set
                 email = ?
-            WHERE
+            where
                 user_id = ?',
             $email,
             $user_id);
@@ -152,11 +144,11 @@ class User extends DatabaseAdapter {
     //
     public function updatePassword($user_id, array $form_data) {
         $this->exec('
-            UPDATE
+            update
                 tuser
-            SET
+            set
                 password = ?
-            WHERE
+            where
                 user_id = ?',
             password_hash($form_data['password'], PASSWORD_DEFAULT),
             $user_id);
@@ -174,9 +166,9 @@ class User extends DatabaseAdapter {
         }
 
         $this->exec('
-            DELETE FROM
+            delete from
                 tuser
-            WHERE
+            where
                 user_id = ?',
             $user_id);
 
@@ -227,14 +219,14 @@ class User extends DatabaseAdapter {
     //
     protected function get($user_id, $username = '', $email = 'x') {
         $data = $this->query('
-            SELECT
+            select
                 user_id,
                 username,
                 email,
                 password
-            FROM
+            from
                 tuser
-            WHERE
+            where
                 user_id = ? or
                 username = ? or
                 email = ?',
